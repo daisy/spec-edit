@@ -40,458 +40,711 @@
 		<section id="intro">
 			<h2>Introduction</h2>
 			
-			<section id="overview">
-				<h3>Overview</h3>
+			<p>&#8230;</p>
+		</section>
+		<section id="repos-manage">
+			<h2>Managing repositories</h2>
+
+			<section>
+				<h3>GitHub tools</h3>
+
+				<p>Git command line</p>
+				<ul>
+					<li>Pros: extensive functionality</li>
+					<li>Cons: difficult to learn/remember the commands, have to manually store GitHub credentials</li>
+				</ul>
+
+				<p>GitHub web site</p>
+				<ul>
+					<li>Pros: easy to use, essential for some actions</li>
+					<li>Cons: limited functionality, not always accessible</li>
+				</ul>
+
+				<p>GitHub Desktop</p>
+				<ul>
+					<li>Pros: graphical interface, installs git command line</li>
+					<li>Cons: not always intuitive</li>
+				</ul>
+
+				<p>TortoiseGit</p>
+				<ul>
+					<li>Pros: easy to use, ability to run most commands, overlays to show changed files</li>
+					<li>Cons: Windows-only, only available in right-click context menu, overlays not accessible</li>
+				</ul>
 			</section>
-			
-			<section id="conformance"></section>
+
+			<section>
+				<h3>Forking v. cloning repositories</h3>
+
+				<p><b>Forking</b> a repository makes a copy under your GitHub account</p>
+
+				<p>Forking is used when you don't have access to edit the source repository</p>
+
+				<p>You still need to clone your fork to your local machine to edit the files</p>
+
+				<p>After editing, you create a pull request to the original repository from the fork</p>
+
+				<p>You don't have to use branches to edit, but they are advised</p>
+
+				<p>Forks are more difficult to work with as you have to keep your fork up-to-date</p>
+
+				<p><b>Cloning</b> a repository downloads a copy of the repository to your local machine</p>
+
+				<p>After cloning, create branches to work on changes</p>
+
+				<p>After editing, you create a pull request from the branch in the source repository</p>
+
+				<p>Cloning is the preferred work mode for editors</p>
+			</section>
+
+			<section>
+				<h3>Checking out a repository</h3>
+
+				<p>From GitHub</p>
+
+				<p>Go to the repository</p>
+
+				<p>Click on the "<code>&lt;> Code</code>" button</p>
+
+				<p>Select "Open with GitHub Desktop" to download</p>
+
+				<p>You will be prompted where to save the repository</p>
+
+				<p>From the command line</p>
+
+				<p>Create a directory for your repositories</p>
+
+				<p>Get the URL of the repository - for example, <code>https://github.com/daisy/ebraille</code></p>
+
+				<p>Run the command:</p>
+				<pre><code>git clone https://github.com/daisy/ebraille</code></pre>
+
+				<p>A new subdirectory named "ebraille" will be created with the source</p>
+			</section>
+
+			<section>
+				<h3>Create a branch</h3>
+
+				<p>From GitHub</p>
+
+				<p>Go to the "Code" section of the repository</p>
+
+				<p>Click the button that shows the Main branch</p>
+
+				<p>Is actually a details element with the summary "Click branches or tags"</p>
+
+				<p>Enter a name for your branch and click the option to create it</p>
+
+				<p>From the command line</p>
+
+				<p>From the directory containing the repository source, run:</p>
+				<pre><code>git branch branch-name</code></pre>
+
+				<p>Try to make branch names short but unique – e.g., name after the issue number it addresses</p>
+
+				<p>Add a prefix to make the branch name more specific – e.g., "metadata/xyz"</p>
+
+				<p>Make sure you are in the "main" branch when creating new branches</p>
+			</section>
+
+			<section>
+				<h3>Pulling the latest updates</h3>
+
+				<p>Running a "pull" request gets the recent commits, branches, etc., from the source repository</p>
+
+				<p>If you create a branch in GitHub, you need to run a pull request first before you can check it out to
+					work on it</p>
+
+				<p>To perform a pull request, run:</p>
+				<pre><code>git pull</code></pre>
+			</section>
+
+			<section>
+				<h3>Switching branches</h3>
+
+				<p>To change to another branch, run:</p>
+				<pre><code>git checkout branch-name</code></pre>
+
+				<p>To view the current branch you are in, run:</p>
+				<pre><code>git branch --show-current</code></pre>
+
+				<p>To switch back to the main branch, run:</p>
+				<pre><code>git checkout main</code></pre>
+			</section>
+
+			<section>
+				<h3>Committing changes</h3>
+
+				<p>Committing saves local changes – allows you to view new changes</p>
+
+				<p>Commits require you to include messages explaining your changes</p>
+
+				<p>To make a commit, run:</p>
+				<pre><code>git commit –a –m "explanatory message"</code></pre>
+
+				<p>Note you have to "add" changed files before you can commit the changes</p>
+
+				<p>You can commit changes to individual files or multiple files</p>
+
+				<p>Commits can be made without pushing them to GitHub</p>
+			</section>
+
+			<section>
+				<h3>File maintenance</h3>
+
+				<p>To add a file to the repository, run:</p>
+				<pre><code>git add filename.xyz</code></pre>
+
+				<p>To add all unversioned files, run:</p>
+				<pre><code>git add -a</code></pre>
+
+				<p>To check for unversioned files, run:</p>
+				<pre><code>git ls-files --other</code></pre>
+
+				<p>To delete a file, run:</p>
+				<pre><code>git rm filename.xyz</code></pre>
+
+				<p>To rename a file, run:</p>
+				<pre><code>git mv oldname.xyz newname.xyz</code></pre>
+			</section>
+
+			<section>
+				<h3>Pushing changes</h3>
+
+				<p>Pushing changes to GitHub saves them remotely</p>
+
+				<p>To push commits, run:</p>
+				<pre><code>git push origin branch-name</code></pre>
+
+				<p>Undoing commits once they've been pushed can be tricky – more of a danger if pushing straight to
+					main</p>
+
+				<p>Pushing to a branch does not open a pull request</p>
+
+				<p>Users are not notified of pushes to branches if no pull request is open</p>
+			</section>
+
+			<section>
+				<h3>Stashing changes</h3>
+
+				<p>Sometimes you need to changes branches or work on another issue while still editing</p>
+
+				<p>Stashing your changes stores them away and leaves the branch "clean"</p>
+
+				<p>When you come back to the branch, you can "pop" the changes from the stash to continue working (or
+					pop them in a new branch)</p>
+
+				<p>To stash changes, run:</p>
+				<pre><code>git stash push –m "stash message"</code></pre>
+
+				<p>To view all stashed changes, run:</p>
+				<pre><code>git stash list</code></pre>
+
+				<p>To pop the top-most changes, run:</p>
+				<pre><code>git pop</code></pre>
+			</section>
+
+			<section>
+				<h3>Opening a pull request</h3>
+
+				<p>Go to the "Pull requests" section of the repository on Github</p>
+
+				<p>Click the "New pull request" button</p>
+
+				<p>Use a descriptive title</p>
+
+				<p>Describe the changes</p>
+
+				<p>Link a related issue using # followed by the issue number</p>
+
+				<p>Automatically close an issue when merged by adding "Fixes" before the issue number – "Fixes #23"</p>
+			</section>
+
+			<section>
+				<h3>Request reviews</h3>
+
+				<p>Pull requests should always be reviewed by at least one other editor before merging</p>
+
+				<p>It is best to pick editors also involved with the issue you are addressing, but if in doubt never
+					worry about asking for too many reviewers</p>
+
+				<p>If you don't request a review, editor's may not be aware you want their input</p>
+
+				<p>To request a review, go to the "Reviewers" section in the pull request and click on the heading</p>
+
+				<p>Enter the GitHub usernames of the people you want to review and select their accounts</p>
+
+				<p>If you are an editor, you can merge your pull request after receiving approvals</p>
+
+				<p>If you are not an editor, let the editors decide when to merge</p>
+			</section>
+
+			<section>
+				<h3>Reviewing pull requests</h3>
+
+				<p>Open the pull request to review</p>
+
+				<p>Click on the "Add your review" button or select the "Files changed" tab</p>
+
+				<p>Click on "Review changes" and select approve if everything is okay</p>
+
+				<p>Otherwise, add comments to the changes by clicking on the + button (labelled "Add line comment")</p>
+
+				<p>Select the closest line for comments to avoid confusion</p>
+
+				<p>Click "Start a review" if you expect to add more than one comment, otherwise click "Add single
+					comment"</p>
+
+				<p>Click the "Finish your review" button to post your comments.</p>
+
+				<p>Select either "Comment" if they are suggestions or "Request changes" if fixes are needed</p>
+
+				<p>To make general comments not specific to the changed source, use the text box at the bottom of the
+					Conversation tab</p>
+			</section>
+
+			<section>
+				<h3>Editing a pull request</h3>
+
+				<p>Sometimes you might want to make a change to another person's pull request – to fix a typo, or modify
+					the text after a discussion</p>
+
+				<p>Follow these steps:</p>
+
+				<ol>
+					<li>Pull the latest data</li>
+					<li>Checkout the branch used to create the pull request</li>
+					<li>Modify the files</li>
+					<li>Commit and push the changes</li>
+				</ol>
+
+				<p>The pull request is automatically updated with the commit</p>
+
+				<p>Users will be notified of changes to an open pull request</p>
+			</section>
+
+			<section>
+				<h3>Pull requests on pull requests</h3>
+
+				<p>Sometimes you may want to propose extensive changes to a pull request and have them reviewed before
+					modifying the original pull request</p>
+
+				<p>Follow these steps:</p>
+
+				<ol>
+					<li>Pull the latest data</li>
+					<li>Checkout the branch used to create the pull request</li>
+					<li>Create a new branch</li>
+					<li>Checkout the new branch</li>
+					<li>Modify the files</li>
+					<li>Commit the changes</li>
+					<li>Open a new pull request</li>
+				</ol>
+
+				<p>When opening the new pull request, make sure the base branch is not "main"</p>
+			</section>
+
+			<section>
+				<h3>Deleting branches</h3>
+
+				<p>If you are no longer using a branch, delete it -- stale branches are confusing to sift through
+					later</p>
+
+				<p>You can delete branches in GitHub as follows:</p>
+
+				<ol>
+					<li>Go to the Code tab of the repository</li>
+					<li>Click on the "Branches" button</li>
+					<li>Click on the garbage can icon next to the branch (button with the label "Delete
+						branch-name")</li>
+				</ol>
+
+				<p>To delete from the command line, run:</p>
+				<pre><code>git push origin –-delete branch-name</code></pre>
+
+				<p>Branches are automatically deleted from the eBraille repository when a pull request is merged</p>
+			</section>
 		</section>
-		
-		<section>
-			<h2>GitHub Tools</h2>
-			<p>Git command line</p>
-			<ul>
-				<li>Pros: extensive functionality</li>
-				<li>Cons: difficult to learn/remember the commands, have to manually store GitHub credentials</li>
-			</ul>
-			<p>GitHub web site</p>
-			<ul>
-				<li>Pros: easy to use, essential for some actions</li>
-				<li>Cons: limited functionality, not always accessible</li>
-			</ul>
-			<p>GitHub Desktop</p>
-			<ul>
-				<li>Pros: graphical interface, installs git command line</li>
-				<li>Cons: not always intuitive</li>
-			</ul>
-			<p>TortoiseGit</p>
-			<ul>
-				<li>Pros: easy to use, ability to run most commands, overlays to show changed files</li>
-				<li>Cons: Windows-only, only available in right-click context menu, overlays not accessible</li>
-			</ul>
-		</section>
-		<section>
-			<h2>Forking v. cloning repositories</h2>
-			<p><b>Forking</b> a repository makes a copy under your GitHub account</p>
-			<p>Forking is used when you don't have access to edit the source repository</p>
-			<p>You still need to clone your fork to your local machine to edit the files</p>
-			<p>After editing, you create a pull request to the original repository from the fork</p>
-			<p>You don't have to use branches to edit, but they are advised</p>
-			<p>Forks are more difficult to work with as you have to keep your fork up-to-date</p>
-			<p><b>Cloning</b> a repository downloads a copy of the repository to your local machine</p>
-			<p>After cloning, create branches to work on changes</p>
-			<p>After editing, you create a pull request from the branch in the source repository</p>
-			<p>Cloning is the preferred work mode for editors</p>
-		</section>
-		<section>
-			<h2>Checking out a repository</h2>
-			<p>From GitHub</p>
-			<p>Go to the repository</p>
-			<p>Click on the "&lt;> Code" button</p>
-			<p>Select "Open with GitHub Desktop" to download</p>
-			<p>You will be prompted where to save the repository</p>
-			<p>From the command line</p>
-			<p>Create a directory for your repositories</p>
-			<p>Get the URL of the repository - https://github.com/daisy/ebraille</p>
-			<p>Run the command:</p>
-			<pre><code>git clone https://github.com/daisy/ebraille</code></pre>
-			<p>A new subdirectory named "ebraille" will be created with the source</p>
-		</section>
-		<section>
-			<h2>Create a branch</h2>
-			<p>From GitHub</p>
-			<p>Go to the "Code" section of the repository</p>
-			<p>Click the button that shows the Main branch</p>
-			<p>Is actually a details element with the summary "Click branches or tags"</p>
-			<p>Enter a name for your branch and click the option to create it</p>
-			<p>From the command line</p>
-			<p>From the directory containing the repository source, run:</p>
-			<pre><code>git branch branch-name</code></pre>
-			<p>Try to make branch names short but unique – e.g., name after the issue number it addresses</p>
-			<p>Add a prefix to make the branch name more specific – e.g., "metadata/xyz"</p>
-			<p>Make sure you are in the "main" branch when creating new branches</p>
-		</section>
-		<section>
-			<h2>Pulling the latest updates</h2>
-			<p>Running a "pull" request gets the recent commits, branches, etc., from the source repository</p>
-			<p>If you create a branch in GitHub, you need to run a pull request first before you can check it out to
-				work on it</p>
-			<p>To perform a pull request, run:</p>
-			<pre><code>git pull</code></pre>
-		</section>
-		<section>
-			<h2>Switching branches</h2>
-			<p>To change to another branch, run:</p>
-			<pre><code>git checkout branch-name</code></pre>
-			<p>To view the current branch you are in, run:</p>
-			<pre><code>git branch --show-current</code></pre>
-			<p>To switch back to the main branch, run:</p>
-			<pre><code>git checkout main</code></pre>
-		</section>
-		<section>
-			<h2>Introduction to Respec</h2>
-			<p>Respec was developed to make specification editing easier</p>
-			<p>Although a lot of W3C groups use respec, it is not exclusive to W3C</p>
-			<p>Respec files are HTML with some JSON metadata - you can edit them in any HTML editor</p>
-			<p>JavaScript code allows you to focus on writing the content of the specification – adds common boilerplate
-				and formatting for you when viewed live</p>
-			<p>For detailed information, go to https://respec.org/docs/</p>
-		</section>
-		<section>
-			<h2>Initializing respec</h2>
-			<p>To use respec on an HTML document, add the following script to the header:</p>
-			<pre><code>&lt;script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove">&lt;/script></code></pre>
-			<p>The only other requirement is the respec initialization metadata</p>
-		</section>
-		<section>
-			<h2>Respec metadata</h2>
-			<p>Respec uses embedded JSON metadata to initialize</p>
-			<p>Every specification must have a script tag with a respecConfig variable:</p>
-			<pre><code>&lt;script class="remove">
+		<section id="editing">
+			<h2>Editing</h2>
+
+			<section>
+				<h3>Introduction to Respec</h3>
+
+				<p>Respec was developed to make specification editing easier</p>
+
+				<p>Although a lot of W3C groups use respec, it is not exclusive to W3C</p>
+
+				<p>Respec files are HTML with some JSON metadata - you can edit them in any HTML editor</p>
+
+				<p>JavaScript code allows you to focus on writing the content of the specification – adds common
+					boilerplate and formatting for you when viewed live</p>
+
+				<p>For detailed information, go to <a href="https://respec.org/docs/">https://respec.org/docs/</a></p>
+			</section>
+
+			<section>
+				<h3>Initializing respec</h3>
+
+				<p>To use respec on an HTML document, add the following script to the header:</p>
+				<pre><code>&lt;script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove">&lt;/script></code></pre>
+
+				<p>The only other requirement is the respec initialization metadata</p>
+			</section>
+
+			<section>
+				<h3>Respec metadata</h3>
+
+				<p>Respec uses embedded JSON metadata to initialize</p>
+
+				<p>Every specification must have a script tag with a respecConfig variable:</p>
+				<pre><code>&lt;script class="remove">
    //&lt;![CDATA[
    var respecConfig = {
       …
    }
 &lt;/script></code></pre>
-			<p>This metadata controls the links at the top of the document, the lists of editors and authors, etc.</p>
-			<p>Setting the metadata goes beyond this tutorial – refer to the respec documentation for more
-				information</p>
-		</section>
-		<section>
-			<h2>Title and subtitle</h2>
-			<p>The title of the specification is specified in the &lt;title> tag</p>
-			<p>Respec automatically generates an &lt;h1> in the body using the same value</p>
-			<p>You can add an &lt;h1 id="title"> to the body if you need html tags in the title, but this is rare</p>
-			<p>To add a subtitle, include an &lt;h2 id="subtitle"> tag in the body</p>
-			<p>Subtitling specifications is usually rare, use an abstract section to describe the specification.</p>
-		</section>
-		<section>
-			<h2>Sectioning a document</h2>
-			<p>Respec looks for certain specially identified section elements, as explained later</p>
-			<p>Although you can write the rest of the specification without using section elements, it is not
-				recommended – sectioning helps identify structural issues</p>
-			<p>Respec will attempt to add sections when they are missing</p>
-			<p>Every section must have a heading</p>
-			<p>Ensure that the number of heading tag matches its nesting, but respect will also attempt to correct
-				misnumbering</p>
-			<p>The top-most sections must have &lt;h2> headings – respec uses &lt;h1> for the document title</p>
-			<p>Respec will auto-number the headings</p>
-		</section>
-		<section>
-			<h2>Sectioning a document</h2>
-			<p>Specifications usually have the following top-level sections:</p>
-			<p>Abstract</p>
-			<p>Status of this Document</p>
-			<p>Introduction</p>
-			<p>Overview</p>
-			<p>Conformance</p>
-			<p>Terminology</p>
-			<p>[body]</p>
-			<p>Change log</p>
-			<p>Acknowledgments</p>
-			<p>References</p>
-			<p>Some of these sections are automatically generated by respec</p>
-		</section>
-		<section>
-			<h2>Table of contents</h2>
-			<p>Respec automatically generates the table of contents from the heading structure</p>
-			<p>How many levels deep the table of contents go can be controlled by the metadata, but it is best not to
-				limit user access</p>
-			<p>Sections can be omitted from the table of contents by adding the class "noTOC" to them, but this is
-				rarely done</p>
-		</section>
-		<section>
-			<h2>Abstract</h2>
-			<p>Respec requires every document have an abstract</p>
-			<p>To add the abstract, include a section with the id "abstract"</p>
-			<pre><code>&lt;section id="abstract"></code></pre>
-			<p>The abstract should only be a few sentences, at most. Leave longer explanations for an introductory
-				section</p>
-		</section>
-		<section>
-			<h2>Status of this document</h2>
-			<p>Some specifications need a status section – typically only W3C</p>
-			<p>A blank section with the id "sotd" is used to add a default status section:</p>
-			<pre><code>&lt;section id="sotd"/></code></pre>
-			<p>Respec generates the boilerplate for this section based on the status of the specification</p>
-			<p>Any content added inside the section is added after the boilerplate</p>
-		</section>
-		<section>
-			<h2>Normative sections</h2>
-			<p>Normative sections include requirements on the author or reading system</p>
-			<p>Normative statements are identified by special keywords, as defined in RFC2119:</p>
-			<p>MUST, MUST NOT, REQUIRED – publications/reading systems that don't meet these requirements are
-				non-conforming</p>
-			<p>SHOULD, SHOULD NOT, RECOMMENDED – publications/reading systems should only deviate from these
-				requirements if there is a good reason</p>
-			<p>MAY, OPTIONAL – at the discretion of the author/developer</p>
-			<p>The keywords SHALL and SHALL NOT are typically not used outside ISO</p>
-			<p>Normative keywords must be in uppercase. Lowercase keywords have no normative weight, but it best to
-				avoid these as they confuse most readers.</p>
-			<p>Every specification needs a blank section with the id "conformance" – respec will add boilerplate
-				language about the keywords:</p>
-			<pre><code>&lt;section id="conformance"/></code></pre>
-			<p>All sections are normative by default</p>
-		</section>
-		<section>
-			<h2>Informative sections</h2>
-			<p>Informative sections are for purely explanatory or illustrative purposes</p>
-			<p>They must not contain normative keywords – also best to avoid lowercase keywords</p>
-			<p>Informative keywords must be identified by adding an "informative" class:</p>
-			<pre><code>&lt;section class="informative"></code></pre>
-			<p>Examples and notes are always considered informative – no special marker is needed</p>
-		</section>
-		<section>
-			<h2>Terminology</h2>
-			<p>Common terminology can be defined in a terminology section</p>
-			<p>Use a &lt;dl> tag for definition lists</p>
-			<p>Each term definition must have a &lt;dfn> tag around the term:</p>
-			<pre><code>&lt;dl>
+
+				<p>This metadata controls the links at the top of the document, the lists of editors and authors,
+					etc.</p>
+
+				<p>Setting the metadata goes beyond this tutorial – refer to the respec documentation for more
+					information</p>
+			</section>
+
+			<section>
+				<h3>Title and subtitle</h3>
+
+				<p>The title of the specification is specified in the <code>&lt;title></code> tag</p>
+
+				<p>Respec automatically generates an <code>&lt;h1></code> in the body using the same value</p>
+
+				<p>You can add an <code>&lt;h1 id="title"></code> to the body if you need html tags in the title, but
+					this is rare</p>
+
+				<p>To add a subtitle, include an <code>&lt;h3 id="subtitle"></code> tag in the body</p>
+
+				<p>Subtitling specifications is usually rare, use an abstract section to describe the specification.</p>
+			</section>
+
+			<section>
+				<h3>Sectioning a document</h3>
+
+				<p>Respec looks for certain specially identified section elements, as explained later</p>
+
+				<p>Although you can write the rest of the specification without using section elements, it is not
+					recommended – sectioning helps identify structural issues</p>
+
+				<p>Respec will attempt to add sections when they are missing</p>
+
+				<p>Every section must have a heading</p>
+
+				<p>Ensure that the number of heading tag matches its nesting, but respect will also attempt to correct
+					misnumbering</p>
+
+				<p>The top-most sections must have &lt;h3> headings – respec uses &lt;h1> for the document title</p>
+
+				<p>Respec will auto-number the headings</p>
+
+				<p>Specifications usually have the following top-level sections:</p>
+
+				<ul>
+					<li>Abstract</li>
+					<li>Status of this Document</li>
+					<li>Introduction</li>
+					<li>Overview</li>
+					<li>Conformance</li>
+					<li>Terminology</li>
+					<li>[body]</li>
+					<li>Change log</li>
+					<li>Acknowledgments</li>
+					<li>References</li>
+				</ul>
+
+				<p>Some of these sections are automatically generated by respec</p>
+			</section>
+
+			<section>
+				<h3>Table of contents</h3>
+
+				<p>Respec automatically generates the table of contents from the heading structure</p>
+
+				<p>How many levels deep the table of contents go can be controlled by the metadata, but it is best not
+					to limit user access</p>
+
+				<p>Sections can be omitted from the table of contents by adding the class "noTOC" to them, but this is
+					rarely done</p>
+			</section>
+
+			<section>
+				<h3>Abstract</h3>
+
+				<p>Respec requires every document have an abstract</p>
+
+				<p>To add the abstract, include a section with the id "abstract"</p>
+				<pre><code>&lt;section id="abstract"></code></pre>
+
+				<p>The abstract should only be a few sentences, at most. Leave longer explanations for an introductory
+					section</p>
+			</section>
+
+			<section>
+				<h3>Status of this document</h3>
+
+				<p>Some specifications need a status section – typically only W3C</p>
+
+				<p>A blank section with the id "sotd" is used to add a default status section:</p>
+				<pre><code>&lt;section id="sotd"/></code></pre>
+
+				<p>Respec generates the boilerplate for this section based on the status of the specification</p>
+
+				<p>Any content added inside the section is added after the boilerplate</p>
+			</section>
+
+			<section>
+				<h3>Normative sections</h3>
+
+				<p>Normative sections include requirements on the author or reading system</p>
+
+				<p>Normative statements are identified by special keywords, as defined in RFC2119:</p>
+
+				<ul>
+					<li>MUST, MUST NOT, REQUIRED – publications/reading systems that don't meet these requirements are
+						non-conforming</li>
+					<li>SHOULD, SHOULD NOT, RECOMMENDED – publications/reading systems should only deviate from these
+						requirements if there is a good reason</li>
+					<li>MAY, OPTIONAL – at the discretion of the author/developer</li>
+				</ul>
+
+				<p>The keywords SHALL and SHALL NOT are typically not used outside ISO</p>
+
+				<p>Normative keywords must be in uppercase. Lowercase keywords have no normative weight, but it best to
+					avoid these as they confuse most readers.</p>
+
+				<p>Every specification needs a blank section with the id "conformance" – respec will add boilerplate
+					language about the keywords:</p>
+				<pre><code>&lt;section id="conformance"/></code></pre>
+
+				<p>All sections are normative by default</p>
+			</section>
+
+			<section>
+				<h3>Informative sections</h3>
+
+				<p>Informative sections are for purely explanatory or illustrative purposes</p>
+
+				<p>They must not contain normative keywords – also best to avoid lowercase keywords</p>
+
+				<p>Informative keywords must be identified by adding an "informative" class:</p>
+				<pre><code>&lt;section class="informative"></code></pre>
+
+				<p>Examples and notes are always considered informative – no special marker is needed</p>
+			</section>
+
+			<section>
+				<h3>Terminology</h3>
+
+				<p>Common terminology can be defined in a terminology section</p>
+
+				<p>Use a &lt;dl> tag for definition lists</p>
+
+				<p>Each term definition must have a &lt;dfn> tag around the term:</p>
+				<pre><code>&lt;dl>
    &lt;dt>&lt;dfn>Term&lt;/dfn>&lt;/dt>
-   &lt;dd>
+   
+   dd>
       &lt;p>Definition&lt;/p>
    &lt;/dd>
    &#8230;
 &lt;/dl></code></pre>
-			<p>Once a term is defined, you can reference it from an &lt;a> tag anywhere in the document:</p>
-			<pre><code>&lt;a>Term&lt;/a></code></pre>
-			<p>Only the first instance of a term in a new section is linked to its definition</p>
-		</section>
-		<section>
-			<h2>Referencing other specifications</h2>
-			<p>When referencing another specification, you must cite the specification</p>
-			<p>Respec supports a shorthand syntax using brackets:</p>
-			<pre><code>[[shortname]]</code></pre>
-			<p>To look up the shortname for a specification, go to https://specref.org</p>
-			<p>References may be normative or informative</p>
-			<p>References inherit their status from the type of section they are in</p>
-			<p>To mark an informative reference in a normative section, add a question mark before the shortname:</p>
-			<pre><code>[[?shortname]]</code></pre>
-			<p>Normative references are not allowed in informative content</p>
-			<p>Respec automatically builds a references section and sorts the references into normative and informative
-				subsections</p>
-		</section>
-		<section>
-			<h2>Referencing elements and attributes</h2>
-			<p>Respec also has a shorthand for linking to element and attributes in other specifications:</p>
-			<pre><code>[^element^] [^element/attribute^]</code></pre>
-			<p>Primarily used for linking to HTML and SVG</p>
-			<p>To look up elements and attributes you can reference, go to <a href="https://respec.org/xref/"
-					>https://respec.org/xref/</a></p>
-			<p>If an element or attribute is specified in more than one specification, you may need to tell respec which
-				one you mean by adding a data-cite attribute:</p>
-			<pre><code>&lt;p data-cite="html">The [^link^] element [[html]] …&lt;/p></code></pre>
-			<p>When citing elements and attributes, also cite the specification.</p>
-		</section>
-		<section>
-			<h2>Adding notes</h2>
-			<p>Two main types of notes:</p>
-			<ul>
-				<li>Regular notes inform readers about normative requirements</li>
-				<li>Editor's notes inform readers about issues to be addressed in the specification</li>
-			</ul>
-			<p>To add a regular note, use the class "note":</p>
-			<pre><code>&lt;div class="note">
+
+				<p>Once a term is defined, you can reference it from an <code>&lt;a></code> tag anywhere in the
+					document:</p>
+				<pre><code>&lt;a>Term&lt;/a></code></pre>
+
+				<p>Only the first instance of a term in a new section is linked to its definition</p>
+			</section>
+
+			<section>
+				<h3>Referencing other specifications</h3>
+
+				<p>When referencing another specification, you must cite the specification</p>
+
+				<p>Respec supports a shorthand syntax using brackets:</p>
+				<pre><code>[[shortname]]</code></pre>
+
+				<p>To look up the shortname for a specification, go to <a href="https://specref.org"
+						>https://specref.org</a></p>
+
+				<p>References may be normative or informative</p>
+
+				<p>References inherit their status from the type of section they are in</p>
+
+				<p>To mark an informative reference in a normative section, add a question mark before the
+					shortname:</p>
+				<pre><code>[[?shortname]]</code></pre>
+
+				<p>Normative references are not allowed in informative content</p>
+
+				<p>Respec automatically builds a references section and sorts the references into normative and
+					informative subsections</p>
+			</section>
+
+			<section>
+				<h3>Referencing elements and attributes</h3>
+
+				<p>Respec also has a shorthand for linking to element and attributes in other specifications:</p>
+				<pre><code>[^element^] [^element/attribute^]</code></pre>
+
+				<p>Primarily used for linking to HTML and SVG</p>
+
+				<p>To look up elements and attributes you can reference, go to <a href="https://respec.org/xref/"
+						>https://respec.org/xref/</a></p>
+
+				<p>If an element or attribute is specified in more than one specification, you may need to tell respec
+					which one you mean by adding a data-cite attribute:</p>
+				<pre><code>&lt;p data-cite="html">The [^link^] element [[html]] …&lt;/p></code></pre>
+
+				<p>When citing elements and attributes, also cite the specification.</p>
+			</section>
+
+			<section>
+				<h3>Adding notes</h3>
+
+				<p>Two main types of notes:</p>
+
+				<ul>
+					<li>Regular notes inform readers about normative requirements</li>
+					<li>Editor's notes inform readers about issues to be addressed in the specification</li>
+				</ul>
+
+				<p>To add a regular note, use the class "note":</p>
+				<pre><code>&lt;div class="note">
    &lt;p>Note text&lt;/p>
 &lt;/div></code></pre>
-			<p>You can put the class on a paragraph, they're easy to miss when editing</p>
-			<p>For editor's note, use the class "ednote" instead</p>
-		</section>
-		<section>
-			<h2>Adding examples</h2>
-			<p>To add examples, use an &lt;aside> element with the class "example"</p>
-			<p>Add a title for the example using a title attribute</p>
-			<p>If necessary, add a description in a &lt;p> tag</p>
-			<p>Use &lt;pre> and &lt;code> elements to wrap the example markup</p>
-			<p>Make sure to escape opening brackets in the example</p>
-			<pre><code>&lt;aside class="example" title="Adding foo to bar">
+
+				<p>You can put the class on a paragraph, they're easy to miss when editing</p>
+
+				<p>For editor's note, use the class "ednote" instead</p>
+			</section>
+
+			<section>
+				<h3>Adding examples</h3>
+
+				<p>To add examples, use an <code>&lt;aside></code> element with the class "example"</p>
+
+				<p>Add a title for the example using a title attribute</p>
+
+				<p>If necessary, add a description in a <code>&lt;p></code> tag</p>
+
+				<p>Use <code>&lt;pre></code> and <code>&lt;code></code> elements to wrap the example markup</p>
+
+				<p>Make sure to escape opening brackets in the example</p>
+				<pre><code>&lt;aside class="example" title="Adding foo to bar">
    &lt;p>The example shows …&lt;/p>
    &lt;pre>&lt;code>&amp;lt;p> &amp;#8230;&amp;lt;/p>&lt;/code>&lt;/pre>
 &lt;/aside></code></pre>
-			<p>Respec will automatically number examples</p>
+
+				<p>Respec will automatically number examples</p>
+			</section>
+
+			<section>
+				<h3>Adding appendixes</h3>
+
+				<p>Marking a section as an appendix changes its numbering to alphabetic</p>
+
+				<p>Add the class "appendix" to the section tag:</p>
+				<pre><code>&lt;section class="appendix"></code></pre>
+
+				<p>Appendixes are often informative, in which case add both classes:</p>
+				<pre><code>&lt;section class="appendix informative"></code></pre>
+
+				<p>Appendixes must be the last sections in the document - respec will convert all sections after the
+					first marked as an appendix to appendices, whether you wanted them as appendixes or not!</p>
+			</section>
+
+			<section>
+				<h3>Change log entries</h3>
+
+				<p>Respec currently doesn't help you out with change logs</p>
+
+				<p>Change log entries should be dated and provide a concise description of the change</p>
+
+				<p>Best practice is to include a link to the github issue for each entry</p>
+
+				<p>A change log may not be needed for a new specification, but can help readers track changes since the
+					last publication</p>
+			</section>
+
+			<section>
+				<h3>Writing considerations</h3>
+
+				<ul>
+					<li>Use US English spellings</li>
+					<li>Follow Chicago Manual of Style grammar and formatting rules</li>
+					<li>Do not use contractions</li>
+					<li>Do not use personal pronouns (I, we, you, etc.)</li>
+					<li>Do not capitalize "web"</li>
+					<li>Spell out acronyms the first time (except where the acronym has become an accepted word, like
+						HTML)</li>
+					<li>Link the first use of terms to their definitions</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Errors and warnings</h3>
+
+				<p>Respec will alert you to any errors and warnings it can detect</p>
+
+				<p>For errors, a red oval button with a number indicating the number of errors will appear beside the
+					Respec box at the top of the document</p>
+
+				<p>Click on the oval to get a list of errors</p>
+
+				<p>Make sure all errors are fixed</p>
+
+				<p>Warnings are the same, but the indicator is a yellow oval</p>
+			</section>
+
+			<section>
+				<h3>Custom styling</h3>
+
+				<p>Although respec provides a default look and feel, it does not cover everything you may need when
+					writing a specification</p>
+
+				<p>To use custom styling, simply add a <code>&lt;style></code> element to the document header with the
+					necessary css</p>
+
+				<p>Do not change the appearance of specifications just because you don't like the respec defaults! Limit
+					custom css to unhandled needs</p>
+			</section>
 		</section>
-		<section>
-			<h2>Adding appendixes</h2>
-			<p>Marking a section as an appendix changes its numbering to alphabetic</p>
-			<p>Add the class "appendix" to the section tag:</p>
-			<pre><code>&lt;section class="appendix"></code></pre>
-			<p>Appendixes are often informative, in which case add both classes:</p>
-			<pre><code>&lt;section class="appendix informative"></code></pre>
-			<p>Appendixes must be the last sections in the document - respec will convert all sections after the first
-				marked as an appendix to appendices, whether you wanted them as appendixes or not!</p>
-		</section>
-		<section>
-			<h2>Change log entries</h2>
-			<p>Respec currently doesn't help you out with change logs</p>
-			<p>Change log entries should be dated and provide a concise description of the change</p>
-			<p>Best practice is to include a link to the github issue for each entry</p>
-			<p>A change log may not be needed for a new specification, but can help readers track changes since the last
-				publication</p>
-		</section>
-		<section>
-			<h2>Writing considerations</h2>
-			<p>Use US English spellings</p>
-			<p>Follow Chicago Manual of Style grammar and formatting rules</p>
-			<p>Do not use contractions</p>
-			<p>Do not use personal pronouns (I, we, you, etc.)</p>
-			<p>Do not capitalize "web"</p>
-			<p>Spell out acronyms the first time (except where the acronym has become an accepted word, like HTML)</p>
-			<p>Link the first use of terms to their definitions</p>
-		</section>
-		<section>
-			<h2>Errors and warnings</h2>
-			<p>Respec will alert you to any errors and warnings it can detect</p>
-			<p>For errors, a red oval button with a number indicating the number of errors will appear beside the Respec
-				box at the top of the document</p>
-			<p>Click on the oval to get a list of errors</p>
-			<p>Make sure all errors are fixed</p>
-			<p>Warnings are the same, but the indicator is a yellow oval</p>
-		</section>
-		<section>
-			<h2>Custom styling</h2>
-			<p>Although respec provides a default look and feel, it does not cover everything you may need when writing
-				a specification</p>
-			<p>To use custom styling, simply add a &lt;style> element to the document header with the necessary css</p>
-			<p>Do not change the appearance of specifications just because you don't like the respec defaults! Limit
-				custom css to unhandled needs</p>
-		</section>
-		<section>
-			<h2>Committing changes</h2>
-			<p>Committing saves local changes – allows you to view new changes</p>
-			<p>Commits require you to include messages explaining your changes</p>
-			<p>To make a commit, run:</p>
-			<pre><code>git commit –a –m "explanatory message"</code></pre>
-			<p>Note you have to "add" changed files before you can commit the changes</p>
-			<p>You can commit changes to individual files or multiple files</p>
-			<p>Commits can be made without pushing them to GitHub</p>
-		</section>
-		<section>
-			<h2>File maintenance</h2>
-			<p>To add a file to the repository, run:</p>
-			<pre><code>git add filename.xyz</code></pre>
-			<p>To add all unversioned files, run:</p>
-			<pre><code>git add -a</code></pre>
-			<p>To check for unversioned files, run:</p>
-			<pre><code>git ls-files --other</code></pre>
-			<p>To delete a file, run:</p>
-			<pre><code>git rm filename.xyz</code></pre>
-			<p>To rename a file, run:</p>
-			<pre><code>git mv oldname.xyz newname.xyz</code></pre>
-		</section>
-		<section>
-			<h2>Pushing changes</h2>
-			<p>Pushing changes to GitHub saves them remotely</p>
-			<p>To push commits, run:</p>
-			<pre><code>git push origin branch-name</code></pre>
-			<p>Undoing commits once they've been pushed can be tricky – more of a danger if pushing straight to main</p>
-			<p>Pushing to a branch does not open a pull request</p>
-			<p>Users are not notified of pushes to branches if no pull request is open</p>
-		</section>
-		<section>
-			<h2>Stashing changes</h2>
-			<p>Sometimes you need to changes branches or work on another issue while still editing</p>
-			<p>Stashing your changes stores them away and leaves the branch "clean"</p>
-			<p>When you come back to the branch, you can "pop" the changes from the stash to continue working (or pop
-				them in a new branch)</p>
-			<p>To stash changes, run:</p>
-			<pre><code>git stash push –m "stash message"</code></pre>
-			<p>To view all stashed changes, run:</p>
-			<pre><code>git stash list</code></pre>
-			<p>To pop the top-most changes, run:</p>
-			<pre><code>git pop</code></pre>
-		</section>
-		<section>
-			<h2>Opening a pull request</h2>
-			<p>Go to the "Pull requests" section of the repository on Github</p>
-			<p>Click the "New pull request" button</p>
-			<p>Use a descriptive title</p>
-			<p>Describe the changes</p>
-			<p>Link a related issue using # followed by the issue number</p>
-			<p>Automatically close an issue when merged by adding "Fixes" before the issue number – "Fixes #23"</p>
-		</section>
-		<section>
-			<h2>Request reviews</h2>
-			<p>Pull requests should always be reviewed by at least one other editor before merging</p>
-			<p>It is best to pick editors also involved with the issue you are addressing, but if in doubt never worry
-				about asking for too many reviewers</p>
-			<p>If you don't request a review, editor's may not be aware you want their input</p>
-			<p>To request a review, go to the "Reviewers" section in the pull request and click on the heading</p>
-			<p>Enter the GitHub usernames of the people you want to review and select their accounts</p>
-			<p>If you are an editor, you can merge your pull request after receiving approvals</p>
-			<p>If you are not an editor, let the editors decide when to merge</p>
-		</section>
-		<section>
-			<h2>Reviewing pull requests</h2>
-			<p>Open the pull request to review</p>
-			<p>Click on the "Add your review" button or select the "Files changed" tab</p>
-			<p>Click on "Review changes" and select approve if everything is okay</p>
-			<p>Otherwise, add comments to the changes by clicking on the + button (labelled "Add line comment")</p>
-			<p>Select the closest line for comments to avoid confusion</p>
-			<p>Click "Start a review" if you expect to add more than one comment, otherwise click "Add single
-				comment"</p>
-			<p>Click the "Finish your review" button to post your comments.</p>
-			<p>Select either "Comment" if they are suggestions or "Request changes" if fixes are needed</p>
-			<p>To make general comments not specific to the changed source, use the text box at the bottom of the
-				Conversation tab</p>
-		</section>
-		<section>
-			<h2>Editing a pull request</h2>
-			<p>Sometimes you might want to make a change to another person's pull request – to fix a typo, or modify the
-				text after a discussion</p>
-			<p>Follow these steps:</p>
-			<ol>
-				<li>Pull the latest data</li>
-				<li>Checkout the branch used to create the pull request</li>
-				<li>Modify the files</li>
-				<li>Commit and push the changes</li>
-			</ol>
-			<p>The pull request is automatically updated with the commit</p>
-			<p>Users will be notified of changes to an open pull request</p>
-		</section>
-		<section>
-			<h2>Pull requests on pull requests</h2>
-			<p>Sometimes you may want to propose extensive changes to a pull request and have them reviewed before
-				modifying the original pull request</p>
-			<p>Follow these steps:</p>
-			<ol>
-				<li>Pull the latest data</li>
-				<li>Checkout the branch used to create the pull request</li>
-				<li>Create a new branch</li>
-				<li>Checkout the new branch</li>
-				<li>Modify the files</li>
-				<li>Commit the changes</li>
-				<li>Open a new pull request</li>
-			</ol>
-			<p>When opening the new pull request, make sure the base branch is not "main"</p>
-		</section>
-		<section>
-			<h2>Deleting branches</h2>
-			<p>If you are no longer using a branch, delete it -- stale branches are confusing to sift through later</p>
-			<p>You can delete branches in GitHub as follows:</p>
-			<ol>
-				<li>Go to the Code tab of the repository</li>
-				<li>Click on the "Branches" button</li>
-				<li>Click on the garbage can icon next to the branch (button with the label "Delete branch-name")</li>
-			</ol>
-			<p>To delete from the command line, run:</p>
-			<pre><code>git push origin –-delete branch-name</code></pre>
-			<p>Branches are automatically deleted from the eBraille repository when a pull request is merged</p>
-		</section>
-		<section>
-			<h2>Resources - GitHub</h2>
-			<p>Get started with GitHub</p>
-			<p>Git Command Reference</p>
-			<p>Pro Git Book</p>
-			<p>Atlassian Tutorials</p>
-			<p>Stack Overflow</p>
-		</section>
-		<section>
-			<h2>Resources - Editing</h2>
-			<p>Respec Documentation</p>
-			<p>SpecRef Database</p>
-			<p>Cross-reference Database</p>
-			<p>W3C Manual of Style</p>
-			<p>Chicago Manual of Style</p>
+		<section id="resources">
+			<h2>Helpful resources</h2>
+
+			<section>
+				<h3>GitHub</h3>
+
+				<ul>
+					<li><a href="https://docs.github.com/en/get-started">Get started with GitHub</a></li>
+					<li><a href="https://git-scm.com/docs">Git Command Reference</a></li>
+					<li><a href="https://git-scm.com/book/en/v2">Pro Git Book</a></li>
+					<li><a href="https://www.atlassian.com/git/tutorials">Atlassian Tutorials</a></li>
+					<li><a href="https://stackoverflow.com/">Stack Overflow</a></li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Editing</h3>
+
+				<ul>
+					<li><a href="https://respec.org/docs/">Respec Documentation</a></li>
+					<li><a href="https://www.specref.org/">SpecRef Database</a></li>
+					<li><a href="https://respec.org/xref/">Cross-reference Database</a></li>
+					<li><a href="https://w3c.github.io/manual-of-style/">W3C Manual of Style</a></li>
+					<li><a href="https://www.chicagomanualofstyle.org/home.html">Chicago Manual of Style</a></li>
+				</ul>
+			</section>
 		</section>
 	</body>
 </html>
