@@ -39,337 +39,372 @@
 		</section>
 		<section id="intro">
 			<h2>Introduction</h2>
-			
+
 			<p>&#8230;</p>
 		</section>
-		<section id="repos-manage">
-			<h2>Managing repositories</h2>
+		<section id="github">
+			<h2>GitHub repositories</h2>
 
-			<section>
-				<h3>GitHub tools</h3>
-
-				<p>Git command line</p>
-				<ul>
-					<li>Pros: extensive functionality</li>
-					<li>Cons: difficult to learn/remember the commands, have to manually store GitHub credentials</li>
-				</ul>
-
-				<p>GitHub web site</p>
-				<ul>
-					<li>Pros: easy to use, essential for some actions</li>
-					<li>Cons: limited functionality, not always accessible</li>
-				</ul>
-
-				<p>GitHub Desktop</p>
-				<ul>
-					<li>Pros: graphical interface, installs git command line</li>
-					<li>Cons: not always intuitive</li>
-				</ul>
-
-				<p>TortoiseGit</p>
-				<ul>
-					<li>Pros: easy to use, ability to run most commands, overlays to show changed files</li>
-					<li>Cons: Windows-only, only available in right-click context menu, overlays not accessible</li>
-				</ul>
+			<section id="github-tools">
+				<h3>Tools</h3>
+				
+				<dl>
+					<dt><a href="https://git-scm.com/">Git command line</a></dt>
+					<dd>
+						<ul>
+							<li>Pros: extensive functionality</li>
+							<li>Cons: difficult to learn/remember the commands, have to manually store GitHub credentials</li>
+						</ul>
+					</dd>
+					
+					<dt><a href="">GitHub web site</a></dt>
+					<dd>
+						<ul>
+							<li>Pros: easy to use, essential for some actions</li>
+							<li>Cons: limited functionality, not always accessible</li>
+						</ul>
+					</dd>
+					
+					<dt><a href="https://desktop.github.com/">GitHub Desktop</a></dt>
+					<dd>
+						<ul>
+							<li>Pros: graphical interface, installs git command line</li>
+							<li>Cons: not always intuitive</li>
+						</ul>
+					</dd>
+					
+					<dt><a href="https://tortoisegit.org/">TortoiseGit</a></dt>
+					<dd>
+						<ul>
+							<li>Pros: easy to use, ability to run most commands, overlays to show changed files</li>
+							<li>Cons: Windows-only, only available in right-click context menu, overlays not accessible</li>
+						</ul>
+					</dd>
+				</dl>
 			</section>
 
-			<section>
-				<h3>Forking v. cloning repositories</h3>
+			<section id="repos-manage">
+				<h3>Managing repositories</h3>
 
-				<p><b>Forking</b> a repository makes a copy under your GitHub account</p>
+				<section id="clone-v-fork">
+					<h4>Cloning v. forking repositories</h4>
 
-				<p>Forking is used when you don't have access to edit the source repository</p>
+					<dl>
+						<dt>Cloning</dt>
+						<dd>
+							<p>Cloning a repository downloads a copy of the repository to your local machine</p>
+							
+							<p>After cloning, create branches to work on changes</p>
+							
+							<p>After editing, you create a pull request from the branch in the source repository</p>
+							
+							<p>Cloning is the preferred work mode for editors</p>
+						</dd>
+						
+						<dt>Forking</dt>
+						<dd>
+							<p>Forking a repository makes a copy under your GitHub account</p>
+							
+							<p>Forking is used when you don't have access to edit the source repository</p>
+							
+							<p>You still need to clone your fork to your local machine to edit the files</p>
+							
+							<p>After editing, you create a pull request to the original repository from the fork</p>
+							
+							<p>You don't have to use branches to edit, but they are advised</p>
+							
+							<p>Forks are more difficult to work with as you have to keep your fork up-to-date</p>
+						</dd>
+					</dl>
+				</section>
 
-				<p>You still need to clone your fork to your local machine to edit the files</p>
+				<section id="repo-checkout">
+					<h4>Checking out a repository</h4>
 
-				<p>After editing, you create a pull request to the original repository from the fork</p>
+					<p>From GitHub</p>
 
-				<p>You don't have to use branches to edit, but they are advised</p>
+					<p>Go to the repository</p>
 
-				<p>Forks are more difficult to work with as you have to keep your fork up-to-date</p>
+					<p>Click on the "<code>&lt;> Code</code>" button</p>
 
-				<p><b>Cloning</b> a repository downloads a copy of the repository to your local machine</p>
+					<p>Select "Open with GitHub Desktop" to download</p>
 
-				<p>After cloning, create branches to work on changes</p>
+					<p>You will be prompted where to save the repository</p>
 
-				<p>After editing, you create a pull request from the branch in the source repository</p>
+					<p>From the command line</p>
 
-				<p>Cloning is the preferred work mode for editors</p>
+					<p>Create a directory for your repositories</p>
+
+					<p>Get the URL of the repository - for example, <code>https://github.com/daisy/ebraille</code></p>
+
+					<p>Run the command:</p>
+					<pre><code>git clone https://github.com/daisy/ebraille</code></pre>
+
+					<p>A new subdirectory named "ebraille" will be created with the source</p>
+				</section>
 			</section>
 
-			<section>
-				<h3>Checking out a repository</h3>
+			<section id="pull-requests">
+				<h3>Pull requests</h3>
 
-				<p>From GitHub</p>
+				<section id="open-pr">
+					<h4>Opening a pull request</h4>
 
-				<p>Go to the repository</p>
+					<p>Go to the "Pull requests" section of the repository on Github</p>
 
-				<p>Click on the "<code>&lt;> Code</code>" button</p>
+					<p>Click the "New pull request" button</p>
 
-				<p>Select "Open with GitHub Desktop" to download</p>
+					<p>Use a descriptive title</p>
 
-				<p>You will be prompted where to save the repository</p>
+					<p>Describe the changes</p>
 
-				<p>From the command line</p>
+					<p>Link a related issue using # followed by the issue number</p>
 
-				<p>Create a directory for your repositories</p>
+					<p>Automatically close an issue when merged by adding "Fixes" before the issue number – "Fixes
+						#23"</p>
+				</section>
 
-				<p>Get the URL of the repository - for example, <code>https://github.com/daisy/ebraille</code></p>
+				<section id="request-reviews">
+					<h4>Request reviews</h4>
 
-				<p>Run the command:</p>
-				<pre><code>git clone https://github.com/daisy/ebraille</code></pre>
+					<p>Pull requests should always be reviewed by at least one other editor before merging</p>
 
-				<p>A new subdirectory named "ebraille" will be created with the source</p>
+					<p>It is best to pick editors also involved with the issue you are addressing, but if in doubt never
+						worry about asking for too many reviewers</p>
+
+					<p>If you don't request a review, editor's may not be aware you want their input</p>
+
+					<p>To request a review, go to the "Reviewers" section in the pull request and click on the
+						heading</p>
+
+					<p>Enter the GitHub usernames of the people you want to review and select their accounts</p>
+
+					<p>If you are an editor, you can merge your pull request after receiving approvals</p>
+
+					<p>If you are not an editor, let the editors decide when to merge</p>
+				</section>
+
+				<section id="review-pr">
+					<h4>Reviewing pull requests</h4>
+
+					<p>Open the pull request to review</p>
+
+					<p>Click on the "Add your review" button or select the "Files changed" tab</p>
+
+					<p>Click on "Review changes" and select approve if everything is okay</p>
+
+					<p>Otherwise, add comments to the changes by clicking on the + button (labelled "Add line
+						comment")</p>
+
+					<p>Select the closest line for comments to avoid confusion</p>
+
+					<p>Click "Start a review" if you expect to add more than one comment, otherwise click "Add single
+						comment"</p>
+
+					<p>Click the "Finish your review" button to post your comments.</p>
+
+					<p>Select either "Comment" if they are suggestions or "Request changes" if fixes are needed</p>
+
+					<p>To make general comments not specific to the changed source, use the text box at the bottom of
+						the Conversation tab</p>
+				</section>
+
+				<section id="edit-pr">
+					<h4>Editing a pull request</h4>
+
+					<p>Sometimes you might want to make a change to another person's pull request – to fix a typo, or
+						modify the text after a discussion</p>
+
+					<p>Follow these steps:</p>
+
+					<ol>
+						<li>Pull the latest data</li>
+						<li>Checkout the branch used to create the pull request</li>
+						<li>Modify the files</li>
+						<li>Commit and push the changes</li>
+					</ol>
+
+					<p>The pull request is automatically updated with the commit</p>
+
+					<p>Users will be notified of changes to an open pull request</p>
+				</section>
+
+				<section id="pr-on-pr">
+					<h4>Pull requests on pull requests</h4>
+
+					<p>Sometimes you may want to propose extensive changes to a pull request and have them reviewed
+						before modifying the original pull request</p>
+
+					<p>Follow these steps:</p>
+
+					<ol>
+						<li>Pull the latest data</li>
+						<li>Checkout the branch used to create the pull request</li>
+						<li>Create a new branch</li>
+						<li>Checkout the new branch</li>
+						<li>Modify the files</li>
+						<li>Commit the changes</li>
+						<li>Open a new pull request</li>
+					</ol>
+
+					<p>When opening the new pull request, make sure the base branch is not "main"</p>
+				</section>
 			</section>
+			<section id="branches">
+				<h3>Branches</h3>
 
-			<section>
-				<h3>Create a branch</h3>
+				<section id="branch-create">
+					<h4>Create a branch</h4>
 
-				<p>From GitHub</p>
+					<p>From GitHub</p>
 
-				<p>Go to the "Code" section of the repository</p>
+					<p>Go to the "Code" section of the repository</p>
 
-				<p>Click the button that shows the Main branch</p>
+					<p>Click the button that shows the Main branch</p>
 
-				<p>Is actually a details element with the summary "Click branches or tags"</p>
+					<p>Is actually a details element with the summary "Click branches or tags"</p>
 
-				<p>Enter a name for your branch and click the option to create it</p>
+					<p>Enter a name for your branch and click the option to create it</p>
 
-				<p>From the command line</p>
+					<p>From the command line</p>
 
-				<p>From the directory containing the repository source, run:</p>
-				<pre><code>git branch branch-name</code></pre>
+					<p>From the directory containing the repository source, run:</p>
+					<pre><code>git branch branch-name</code></pre>
 
-				<p>Try to make branch names short but unique – e.g., name after the issue number it addresses</p>
+					<p>Try to make branch names short but unique – e.g., name after the issue number it addresses</p>
 
-				<p>Add a prefix to make the branch name more specific – e.g., "metadata/xyz"</p>
+					<p>Add a prefix to make the branch name more specific – e.g., "metadata/xyz"</p>
 
-				<p>Make sure you are in the "main" branch when creating new branches</p>
+					<p>Make sure you are in the "main" branch when creating new branches</p>
+				</section>
+
+				<section id="branch-switch">
+					<h4>Switching branches</h4>
+
+					<p>To change to another branch, run:</p>
+					<pre><code>git checkout branch-name</code></pre>
+
+					<p>To view the current branch you are in, run:</p>
+					<pre><code>git branch --show-current</code></pre>
+
+					<p>To switch back to the main branch, run:</p>
+					<pre><code>git checkout main</code></pre>
+				</section>
+
+				<section id="branch-delete">
+					<h4>Deleting branches</h4>
+
+					<p>If you are no longer using a branch, delete it -- stale branches are confusing to sift through
+						later</p>
+
+					<p>You can delete branches in GitHub as follows:</p>
+
+					<ol>
+						<li>Go to the Code tab of the repository</li>
+						<li>Click on the "Branches" button</li>
+						<li>Click on the garbage can icon next to the branch (button with the label "Delete
+							branch-name")</li>
+					</ol>
+
+					<p>To delete from the command line, run:</p>
+					<pre><code>git push origin –-delete branch-name</code></pre>
+
+					<p>Branches are automatically deleted from the eBraille repository when a pull request is merged</p>
+				</section>
 			</section>
+			<section id="repo-changes">
+				<h3>Managing changes</h3>
 
-			<section>
-				<h3>Pulling the latest updates</h3>
+				<section id="pull-updates">
+					<h4>Pulling the latest updates</h4>
 
-				<p>Running a "pull" request gets the recent commits, branches, etc., from the source repository</p>
+					<p>Running a "pull" request gets the recent commits, branches, etc., from the source repository</p>
 
-				<p>If you create a branch in GitHub, you need to run a pull request first before you can check it out to
-					work on it</p>
+					<p>If you create a branch in GitHub, you need to run a pull request first before you can check it
+						out to work on it</p>
 
-				<p>To perform a pull request, run:</p>
-				<pre><code>git pull</code></pre>
-			</section>
+					<p>To perform a pull request, run:</p>
+					<pre><code>git pull</code></pre>
+				</section>
 
-			<section>
-				<h3>Switching branches</h3>
+				<section id="commits">
+					<h4>Committing changes</h4>
 
-				<p>To change to another branch, run:</p>
-				<pre><code>git checkout branch-name</code></pre>
+					<p>Committing saves local changes – allows you to view new changes</p>
 
-				<p>To view the current branch you are in, run:</p>
-				<pre><code>git branch --show-current</code></pre>
+					<p>Commits require you to include messages explaining your changes</p>
 
-				<p>To switch back to the main branch, run:</p>
-				<pre><code>git checkout main</code></pre>
-			</section>
+					<p>To make a commit, run:</p>
+					<pre><code>git commit –a –m "explanatory message"</code></pre>
 
-			<section>
-				<h3>Committing changes</h3>
+					<p>Note you have to "add" changed files before you can commit the changes</p>
 
-				<p>Committing saves local changes – allows you to view new changes</p>
+					<p>You can commit changes to individual files or multiple files</p>
 
-				<p>Commits require you to include messages explaining your changes</p>
+					<p>Commits can be made without pushing them to GitHub</p>
+				</section>
 
-				<p>To make a commit, run:</p>
-				<pre><code>git commit –a –m "explanatory message"</code></pre>
+				<section id="file-maintenance">
+					<h4>File maintenance</h4>
 
-				<p>Note you have to "add" changed files before you can commit the changes</p>
+					<p>To add a file to the repository, run:</p>
+					<pre><code>git add filename.xyz</code></pre>
 
-				<p>You can commit changes to individual files or multiple files</p>
+					<p>To add all unversioned files, run:</p>
+					<pre><code>git add -a</code></pre>
 
-				<p>Commits can be made without pushing them to GitHub</p>
-			</section>
+					<p>To check for unversioned files, run:</p>
+					<pre><code>git ls-files --other</code></pre>
 
-			<section>
-				<h3>File maintenance</h3>
+					<p>To delete a file, run:</p>
+					<pre><code>git rm filename.xyz</code></pre>
 
-				<p>To add a file to the repository, run:</p>
-				<pre><code>git add filename.xyz</code></pre>
+					<p>To rename a file, run:</p>
+					<pre><code>git mv oldname.xyz newname.xyz</code></pre>
+				</section>
 
-				<p>To add all unversioned files, run:</p>
-				<pre><code>git add -a</code></pre>
+				<section id="push-changes">
+					<h4>Pushing changes</h4>
 
-				<p>To check for unversioned files, run:</p>
-				<pre><code>git ls-files --other</code></pre>
+					<p>Pushing changes to GitHub saves them remotely</p>
 
-				<p>To delete a file, run:</p>
-				<pre><code>git rm filename.xyz</code></pre>
+					<p>To push commits, run:</p>
+					<pre><code>git push origin branch-name</code></pre>
 
-				<p>To rename a file, run:</p>
-				<pre><code>git mv oldname.xyz newname.xyz</code></pre>
-			</section>
+					<p>Undoing commits once they've been pushed can be tricky – more of a danger if pushing straight to
+						main</p>
 
-			<section>
-				<h3>Pushing changes</h3>
+					<p>Pushing to a branch does not open a pull request</p>
 
-				<p>Pushing changes to GitHub saves them remotely</p>
+					<p>Users are not notified of pushes to branches if no pull request is open</p>
+				</section>
 
-				<p>To push commits, run:</p>
-				<pre><code>git push origin branch-name</code></pre>
+				<section id="stash-changes">
+					<h4>Stashing changes</h4>
 
-				<p>Undoing commits once they've been pushed can be tricky – more of a danger if pushing straight to
-					main</p>
+					<p>Sometimes you need to changes branches or work on another issue while still editing</p>
 
-				<p>Pushing to a branch does not open a pull request</p>
+					<p>Stashing your changes stores them away and leaves the branch "clean"</p>
 
-				<p>Users are not notified of pushes to branches if no pull request is open</p>
-			</section>
+					<p>When you come back to the branch, you can "pop" the changes from the stash to continue working
+						(or pop them in a new branch)</p>
 
-			<section>
-				<h3>Stashing changes</h3>
+					<p>To stash changes, run:</p>
+					<pre><code>git stash push –m "stash message"</code></pre>
 
-				<p>Sometimes you need to changes branches or work on another issue while still editing</p>
+					<p>To view all stashed changes, run:</p>
+					<pre><code>git stash list</code></pre>
 
-				<p>Stashing your changes stores them away and leaves the branch "clean"</p>
-
-				<p>When you come back to the branch, you can "pop" the changes from the stash to continue working (or
-					pop them in a new branch)</p>
-
-				<p>To stash changes, run:</p>
-				<pre><code>git stash push –m "stash message"</code></pre>
-
-				<p>To view all stashed changes, run:</p>
-				<pre><code>git stash list</code></pre>
-
-				<p>To pop the top-most changes, run:</p>
-				<pre><code>git pop</code></pre>
-			</section>
-
-			<section>
-				<h3>Opening a pull request</h3>
-
-				<p>Go to the "Pull requests" section of the repository on Github</p>
-
-				<p>Click the "New pull request" button</p>
-
-				<p>Use a descriptive title</p>
-
-				<p>Describe the changes</p>
-
-				<p>Link a related issue using # followed by the issue number</p>
-
-				<p>Automatically close an issue when merged by adding "Fixes" before the issue number – "Fixes #23"</p>
-			</section>
-
-			<section>
-				<h3>Request reviews</h3>
-
-				<p>Pull requests should always be reviewed by at least one other editor before merging</p>
-
-				<p>It is best to pick editors also involved with the issue you are addressing, but if in doubt never
-					worry about asking for too many reviewers</p>
-
-				<p>If you don't request a review, editor's may not be aware you want their input</p>
-
-				<p>To request a review, go to the "Reviewers" section in the pull request and click on the heading</p>
-
-				<p>Enter the GitHub usernames of the people you want to review and select their accounts</p>
-
-				<p>If you are an editor, you can merge your pull request after receiving approvals</p>
-
-				<p>If you are not an editor, let the editors decide when to merge</p>
-			</section>
-
-			<section>
-				<h3>Reviewing pull requests</h3>
-
-				<p>Open the pull request to review</p>
-
-				<p>Click on the "Add your review" button or select the "Files changed" tab</p>
-
-				<p>Click on "Review changes" and select approve if everything is okay</p>
-
-				<p>Otherwise, add comments to the changes by clicking on the + button (labelled "Add line comment")</p>
-
-				<p>Select the closest line for comments to avoid confusion</p>
-
-				<p>Click "Start a review" if you expect to add more than one comment, otherwise click "Add single
-					comment"</p>
-
-				<p>Click the "Finish your review" button to post your comments.</p>
-
-				<p>Select either "Comment" if they are suggestions or "Request changes" if fixes are needed</p>
-
-				<p>To make general comments not specific to the changed source, use the text box at the bottom of the
-					Conversation tab</p>
-			</section>
-
-			<section>
-				<h3>Editing a pull request</h3>
-
-				<p>Sometimes you might want to make a change to another person's pull request – to fix a typo, or modify
-					the text after a discussion</p>
-
-				<p>Follow these steps:</p>
-
-				<ol>
-					<li>Pull the latest data</li>
-					<li>Checkout the branch used to create the pull request</li>
-					<li>Modify the files</li>
-					<li>Commit and push the changes</li>
-				</ol>
-
-				<p>The pull request is automatically updated with the commit</p>
-
-				<p>Users will be notified of changes to an open pull request</p>
-			</section>
-
-			<section>
-				<h3>Pull requests on pull requests</h3>
-
-				<p>Sometimes you may want to propose extensive changes to a pull request and have them reviewed before
-					modifying the original pull request</p>
-
-				<p>Follow these steps:</p>
-
-				<ol>
-					<li>Pull the latest data</li>
-					<li>Checkout the branch used to create the pull request</li>
-					<li>Create a new branch</li>
-					<li>Checkout the new branch</li>
-					<li>Modify the files</li>
-					<li>Commit the changes</li>
-					<li>Open a new pull request</li>
-				</ol>
-
-				<p>When opening the new pull request, make sure the base branch is not "main"</p>
-			</section>
-
-			<section>
-				<h3>Deleting branches</h3>
-
-				<p>If you are no longer using a branch, delete it -- stale branches are confusing to sift through
-					later</p>
-
-				<p>You can delete branches in GitHub as follows:</p>
-
-				<ol>
-					<li>Go to the Code tab of the repository</li>
-					<li>Click on the "Branches" button</li>
-					<li>Click on the garbage can icon next to the branch (button with the label "Delete
-						branch-name")</li>
-				</ol>
-
-				<p>To delete from the command line, run:</p>
-				<pre><code>git push origin –-delete branch-name</code></pre>
-
-				<p>Branches are automatically deleted from the eBraille repository when a pull request is merged</p>
+					<p>To pop the top-most changes, run:</p>
+					<pre><code>git pop</code></pre>
+				</section>
 			</section>
 		</section>
-		<section id="editing">
-			<h2>Editing</h2>
+		<section id="respec">
+			<h2>Respec</h2>
 
-			<section>
-				<h3>Introduction to Respec</h3>
+			<section id="respec-intro">
+				<h3>Introduction</h3>
 
 				<p>Respec was developed to make specification editing easier</p>
 
@@ -383,8 +418,8 @@
 				<p>For detailed information, go to <a href="https://respec.org/docs/">https://respec.org/docs/</a></p>
 			</section>
 
-			<section>
-				<h3>Initializing respec</h3>
+			<section id="respec-init">
+				<h3>Initializing the code</h3>
 
 				<p>To use respec on an HTML document, add the following script to the header:</p>
 				<pre><code>&lt;script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove">&lt;/script></code></pre>
@@ -392,8 +427,8 @@
 				<p>The only other requirement is the respec initialization metadata</p>
 			</section>
 
-			<section>
-				<h3>Respec metadata</h3>
+			<section id="respec-metadata">
+				<h3>Adding metadata</h3>
 
 				<p>Respec uses embedded JSON metadata to initialize</p>
 
@@ -411,6 +446,9 @@
 				<p>Setting the metadata goes beyond this tutorial – refer to the respec documentation for more
 					information</p>
 			</section>
+		</section>
+		<section id="editing">
+			<h2>Editing</h2>
 
 			<section>
 				<h3>Title and subtitle</h3>
