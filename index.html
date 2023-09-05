@@ -5,7 +5,6 @@
 		<title>DAISY Specification Editing Guide</title>
 		<script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
 		<script class="remove">
-			//<![CDATA[
 			var respecConfig = {
 				shortName: 'spec-edit',
 				specStatus: 'base',
@@ -29,7 +28,6 @@
 				],
 				github: 'daisy/spec-edit'
 			};
-			// ]]>
 		</script>
 	</head>
 	<body>
@@ -40,7 +38,7 @@
 		<section id="intro">
 			<h2>Introduction</h2>
 
-			<p>&#8230;</p>
+			<p></p>
 		</section>
 		<section id="respec">
 			<h2>Respec</h2>
@@ -48,45 +46,91 @@
 			<section id="respec-intro">
 				<h3>Introduction</h3>
 
-				<p>Respec was developed to make specification editing easier.</p>
+				<p>Respec is a JavaScript tool developed by the W3C to make editing their specifications easier and more
+					consistent. The code allows you to focus on writing the content of the specification, while it takes
+					care of adding common boilerplate and formatting when the document is viewed live.</p>
 
-				<p>Although a lot of W3C groups use respec, it is not exclusive to W3C.</p>
+				<p>Although developed for W3C, respec is no longer exclusively for developing W3C specifications. DAISY,
+					for example, customizes a "base" profile to format its specifications and notes.</p>
 
-				<p>Respec files are HTML with some JSON metadata - you can edit them in any HTML editor.</p>
+				<p>The functioning of respec is meant to be largely transparent to anyone editing specifications. Using
+					the tool only requires a script element to call in the respec code and a block of JSON metadata to
+					initialize it. Once these are set, editors will primarily be working in HTML to author the content.
+					This means you can use whatever HTML editor you are most comfortable with.</p>
 
-				<p>JavaScript code allows you to focus on writing the content of the specification – adds common
-					boilerplate and formatting for you when viewed live.</p>
+				<p>This section covers the setup and initialization of respec. Information on how to tag HTML documents
+					to take advantage of respec's built-in formatting is covered in the next section on <a
+						href="#editing">editing</a>.</p>
 
-				<p>For detailed information, go to <a href="https://respec.org/docs/">https://respec.org/docs/</a>.</p>
+				<div class="note">
+					<p>For detailed information on all aspects of respec, please visit the <a
+							href="https://respec.org/docs/">Respec Documentation</a>.</p>
+				</div>
 			</section>
 
 			<section id="respec-init">
 				<h3>Initializing the code</h3>
 
-				<p>To use respec on an HTML document, add the following script to the header:</p>
-				<pre><code>&lt;script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove">&lt;/script></code></pre>
+				<p>The respec source code is hosted at <code>https://www.w3.org/Tools/respec/respec-w3c</code></p>
 
-				<p>The only other requirement is the respec initialization metadata.</p>
+				<p>To call in this code, you only need to add a <code>script</code> tag to the HTML header.</p>
+
+				<aside title="Respec script tag">
+					<pre><code>&lt;html &#8230;>
+   &lt;head>
+      &#8230;
+      &lt;script
+         src="https://www.w3.org/Tools/respec/respec-w3c"
+         class="remove">
+      &lt;/script>
+      &#8230;
+   &lt;/head>
+   &#8230;
+&lt;/html></code></pre>
+				</aside>
+
+				<p>Note the use of the <code>class</code> attribute value "<code>remove</code>" on the
+						<code>script</code> tag. This class ensures that respec will remove the <code>script</code> tag
+					(i.e., itself) when exporting a static version of the specification for publication.</p>
+
+				<p>The only other requirement to get respec working is to add the <a href="#respec-metadata"
+						>initialization metadata</a>.</p>
 			</section>
 
 			<section id="respec-metadata">
-				<h3>Adding metadata</h3>
+				<h3>Adding the initialization metadata</h3>
 
-				<p>Respec uses embedded JSON metadata to initialize.</p>
+				<p>Respec uses JSON metadata to initialize. This metadata is normally embedded in the <code>head</code>
+					of the HTML document using a <code>script</code> tag. Although it is possible to import the
+					metadata, doing so is not recommended. When stored outside the specification, the metadata is often
+					forgotten and not updated.</p>
 
-				<p>Every specification must have a script tag with a respecConfig variable:</p>
-				<pre><code>&lt;script class="remove">
-   //&lt;![CDATA[
-   var respecConfig = {
-      …
-   }
-&lt;/script></code></pre>
+				<p>The <code>script</code> tag must contain a <code>respecConfig</code> variable definition, which in
+					turn must be an object. They key/value pairs in this object define the intialization parameters.</p>
 
-				<p>This metadata controls the links at the top of the document, the lists of editors and authors,
-					etc.</p>
+				<aside title="Respec metadata script tag and variable">
+					<pre><code>&lt;html &#8230;>
+   &lt;head>
+      &#8230;
+      &lt;script
+         src="https://www.w3.org/Tools/respec/respec-w3c"
+         class="remove">
+      &lt;/script>
+      &lt;script class="remove">
+         var respecConfig = {
+            …
+         }
+      &lt;/script>
+   &lt;/head>
+   &#8230;
+&lt;/html></code></pre>
+				</aside>
 
-				<p>Setting the metadata goes beyond this tutorial – refer to the respec documentation for more
-					information.</p>
+				<p>The initialization metadata controls such aspects of the document as the links at the top of the
+					document (current version, previous version, etc.), the lists of editors and authors, etc.</p>
+
+				<p>Setting the various metadata properties goes beyond this tutorial, however. Refer to the <a
+						href="https://respec.org/docs/">Respec Documentation</a> for more information.</p>
 			</section>
 
 			<section id="respec-err-warn">
@@ -399,7 +443,7 @@
 
 			<section id="backmatter">
 				<h3>Back matter</h3>
-				
+
 				<section id="adding-app">
 					<h4>Adding appendixes</h4>
 
@@ -659,7 +703,7 @@
 					<p>When opening the new pull request, make sure the base branch is not "main".</p>
 				</section>
 			</section>
-			
+
 			<section id="branches">
 				<h3>Branches</h3>
 
@@ -723,7 +767,7 @@
 						merged.</p>
 				</section>
 			</section>
-			
+
 			<section id="repo-changes">
 				<h3>Managing changes</h3>
 
