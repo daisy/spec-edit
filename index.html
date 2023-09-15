@@ -212,69 +212,110 @@
 
 			<section id="spec-structure">
 				<h3>Sectioning specifications</h3>
-				
+
 				<section id="sections">
 					<h4>Using sections</h4>
-					
-					<p>ReSpec looks for certain specially identified section elements, as explained later.</p>
-					
-					<p>Although you can write the rest of the specification without using section elements, it is not
-						recommended – sectioning helps identify structural issues.</p>
-					
-					<p>ReSpec will attempt to add sections when they are missing.</p>
-					
-					<p>Every section must have a heading.</p>
-					
-					<p>Ensure that the number of heading tag matches its nesting, but ReSpec will also attempt to
-						correct misnumbering.</p>
-					
-					<p>The top-most sections must have &lt;h3> headings – ReSpec uses &lt;h1> for the document
-						title.</p>
-					
-					<p>ReSpec will auto-number the headings.</p>
+
+					<p>Section tags are an important part of structuring a specification, and you must author DAISY
+						specifications using <code>section</code> elements around each self-contained section of
+						content.</p>
+
+					<p>Every <code>section</code> tag should contain a unique ID in its <code>id</code> attribute.
+						Although ReSpec will add IDs if they are missing (with the value match the heading), relying on
+						this feature is strongly discouraged. If you later change your title, for example, links to it
+						will break if you rely on ReSpec's dynamic identifying.</p>
+
+					<p>The <code>section</code> tag is also used to differentiate <a href="#informative-sections"
+							>informative content</a> from <a href="#normative-sections">normative content</a>, as
+						described in more detail in the next two subsections.</p>
+
+					<p>In addition, every section must have a heading. Ensure that the number of heading tag matches its
+						nesting. The top-most sections in a specification must have <code>h2</code> headings – ReSpec
+						uses <code>h1</code> for the document title.</p>
+
+					<div class="note">
+						<p>ReSpec will attempt to correct misnumbered heading tags but do not rely on this behavior.</p>
+					</div>
+
+					<p>Do not add numbers your headings (e.g., "<code>&lt;h2>1. &#8230;&lt;/h2></code>"). ReSpec will
+						add the correct numbering based on whether the content is preliminary, body, or back matter.</p>
+
+					<div class="note">
+						<p>If a heading occurs without a <code>section</code> tag, ReSpec will attempt to add one to
+							match what it infers to be the correct structure. Be careful about relying on this kind of
+							auto-correction, however, as often leads to mis-structuring of subsections.</p>
+					</div>
 				</section>
-				
+
 				<section id="normative-sections">
 					<h4>Normative sections</h4>
-					
-					<p>Normative sections include requirements on the author or reading system.</p>
-					
-					<p>Normative statements are identified by special keywords, as defined in RFC2119:</p>
-					
-					<ul>
-						<li>MUST, MUST NOT, REQUIRED – publications/reading systems that don't meet these requirements
-							are non-conforming</li>
-						<li>SHOULD, SHOULD NOT, RECOMMENDED – publications/reading systems should only deviate from
-							these requirements if there is a good reason</li>
-						<li>MAY, OPTIONAL – at the discretion of the author/developer</li>
-					</ul>
-					
-					<p>The keywords SHALL and SHALL NOT are typically not used outside ISO.</p>
-					
-					<p>Normative keywords must be in uppercase. Lowercase keywords have no normative weight, but it best
-						to avoid these as they confuse most readers.</p>
-					
-					<p>Every specification needs a blank section with the id "conformance" – ReSpec will add boilerplate
-						language about the keywords:</p>
-					<pre><code>&lt;section id="conformance"/></code></pre>
-					
-					<p>All sections are normative by default.</p>
+
+					<p>All specifications are composed of normative and informative sections. Normative sections include
+						the requirements the author, reading system, etc. must follow.</p>
+
+					<p>In DAISY specifications, all sections are normative by default. You do not need to specially mark
+						these sections as normative.</p>
+
+					<p>Specifications must include a <a href="#spec-conformance">Conformance section</a>. This section
+						explains the <a href="#normative-statements">normative keywords</a> used in the document.</p>
+
+					<section id="normative-statements">
+						<h5>Normative statements</h5>
+
+						<p>Normative sections are composed of one or more requirements. These requirements must be
+							identified by special keywords identified in [[rfc2119]].</p>
+
+						<p>These keywords include:</p>
+
+						<ul>
+							<li><code>MUST</code>, <code>MUST NOT</code>, and <strong>REQUIRED</strong> – if the target
+								of the statement (content, reading system, etc.) does not meet these requirements it is
+								non-conforming</li>
+							<li><code>SHOULD</code>, <code>SHOULD NOT</code>, and <code>RECOMMENDED</code> – the target
+								of the statement should only deviate from these requirements if there is a good
+								reason</li>
+							<li><code>MAY</code> and <code>OPTIONAL</code> – meeting these requirements is at the
+								discretion of the author or developer.</li>
+						</ul>
+
+						<div class="note">
+							<p>DAISY specifications should not use keywords SHALL and SHALL NOT. They are equivalent to
+								the "must" keywords and only add confusion.</p>
+						</div>
+
+						<p>Normative keywords must be in uppercase. Lowercase keywords have no normative weight, but it
+							best to avoid these as they confuse most readers.</p>
+					</section>
 				</section>
-				
+
 				<section id="informative-sections">
 					<h4>Informative sections</h4>
-					
-					<p>Informative sections are for purely explanatory or illustrative purposes.</p>
-					
-					<p>They must not contain normative keywords – also best to avoid lowercase keywords.</p>
-					
-					<p>Informative keywords must be identified by adding an "informative" class:</p>
-					<pre><code>&lt;section class="informative"></code></pre>
-					
-					<p>Examples and notes are always considered informative – no special marker is needed.</p>
+
+					<p>Informative sections are for explanatory or illustrative content. They must not contain normative
+						statements and should avoid the lowercase equivalents (confuses readers whether the section is
+						misidentified as informative).</p>
+
+					<p>Informative sections must be identified by adding an "informative" class to them.</p>
+
+					<aside class="example" title="An informative section">
+						<pre><code>&lt;section class="informative">
+   &lt;h3>Examples&lt;/h3>
+   &#8230;
+&lt;/section></code></pre>
+					</aside>
+
+					<p>Be careful how you use the informative class. It applies to the section it is added to as well as
+						any subsections that section contains. Marking an entire <a href="#introductions"
+							>introduction</a> informative, for example, could incorrectly result in the <a
+							href="#spec-conformance">conformance section</a> and <a href="#spec-terminology">terminology
+							section</a> becoming informative.</p>
+
+					<div class="note">
+						<p>Examples and notes are always considered informative – no special marker is needed.</p>
+					</div>
 				</section>
 			</section>
-			
+
 			<section id="prelim">
 				<h3>Preliminary matter</h3>
 
@@ -393,34 +434,96 @@
 
 				<section id="introductions">
 					<h4>Introductions</h4>
-					
-					<p>DAISY specifications should include an introduction section to contain any additional 
-						preliminary matter.</p>
-					
-					<section id="spec-overview">
-						<h5>Overview</h5>
+
+					<p>DAISY specifications should include an introduction section to group any additional preliminary
+						matter.</p>
+
+					<aside class="example" title="Overview section">
+						<pre><code>&lt;section id="intro">
+   &lt;h2>Introduction&lt;/h2>
+   
+   &lt;section id="overview" class="informative">
+      &lt;h3>Overview&lt;/h3>
+      &#8212;
+   &lt;/section>
+&lt;/section></code></pre>
+					</aside>
 						
-						<p></p>
+						<p>Do not mark the introduction as informative unless all the subsections it contains are also
+						informative.</p>
+						
+						<p>The following sections explain the most common subsections found in the introduction, but
+							you can add any additional explanatory subsections you need.</p>
+
+					<section id="spec-overview">
+						<h5>Overviews and Backgrounds</h5>
+
+						<p>An overview section provides you the opportunity to informatively describe the purpose, scope
+							and features of the specification in more detail than the <a href="#abstract">abstract</a>
+							allows. It is generally recommended to always include one in DAISY specifications.</p>
+
+						<p>Make sure mark the overview as informative.</p>
+
+						<aside class="example" title="Overview section">
+							<pre><code>&lt;section id="overview" class="informative">
+   &lt;h3>Overview&lt;/h3>
+   
+   &lt;p>
+      The need for a common digital braille format &#8212;
+   &lt;/p>
+&lt;/section></code></pre>
+						</aside>
+
+						<p>DAISY specifications may also contain background sections, although these are not common. A
+							background section differs from an overview in that it delves into the problems that led to
+							creating the specification, for example, or outlines how the specification is a response to
+							previous efforts. The background should typically follow the overview.</p>
+
+						<aside class="example" title="Background section">
+							<pre><code>&lt;section id="background" class="informative">
+   &lt;h3>Background&lt;/h3>
+   
+   &lt;p>
+      The first effort to solve the issue of &#8212;
+   &lt;/p>
+&lt;/section></code></pre>
+						</aside>
 					</section>
-					
+
 					<section id="spec-conformance">
 						<h5>Conformance</h5>
-						
-						<p></p>
+
+						<p>DAISY specifications must have a conformance section. This section should go after the <a
+								href="#spec-overview">Overview</a>.</p>
+
+						<p>You should not include any text in the conformance section or give it a heading. ReSpec will
+							automatically populate the required text.</p>
+
+						<aside class="example" title="Empty conformance section">
+							<pre><code>&lt;section id="conformance">&lt;/section></code></pre>
+						</aside>
+
+						<p>If you do add content to the section, ReSpec adds it after the boilerplate it generates.</p>
+
+						<div class="note">
+							<p>If you are writing a informative note, not a specification, omit a conformance section.
+								ReSpec will emit a warning but this can be ignored.</p>
+						</div>
 					</section>
-					
+
 					<section id="spec-terminology">
 						<h5>Terminology</h5>
-						
+
 						<p>If your specification uses terms that need defining, add a terminology section in the
-							introductory material.</p>
-						
+							introductory material. This section typically follows the <a href="spec-conformance"
+								>conformance section</a>.</p>
+
 						<p>Within the terminology section, add a definition list (<code>dl</code> tag) to define the
 							terms.</p>
-						
-						<p>Each <code>dt</code> must include a <code>dfn</code> tag around the term. This allows ReSpec to
-							harvest the terminology and simplify linking to terms.</p>
-						
+
+						<p>Each <code>dt</code> must include a <code>dfn</code> tag around the term. This allows ReSpec
+							to harvest the terminology and simplify linking to terms.</p>
+
 						<aside class="example" title="Typical terminology section">
 							<pre><code>&lt;section id="terminology">
    &lt;h2>Terminology&lt;/h2>
@@ -434,40 +537,40 @@
       &#8230;
    &lt;/dl>
 &lt;/section</code></pre>
-							
+
 						</aside>
-						
+
 						<p>Never include normative requirements in a terminology section! Users do not expect to find
 							implementation details in definitions. Add requirements to a section most applicable to the
 							term.</p>
-						
+
 						<div class="note">
 							<p>Terminology is always considered a normative part of a specification even if it does not
 								contain normative requirements. Do not mark the section as informative.</p>
 						</div>
-						
-						<p>Once a term is defined, you can reference it from an <code>a</code> tag anywhere in the document.
-							You do not have to include a <code>href</code> attribute.</p>
-						
+
+						<p>Once a term is defined, you can reference it from an <code>a</code> tag anywhere in the
+							document. You do not have to include a <code>href</code> attribute.</p>
+
 						<aside class="example" title="Link to a definition">
 							<pre><code>When the &lt;a>reading system&lt;/a> opens the document &#8230;</code></pre>
 						</aside>
-						
+
 						<p>Only the first instance of a term in a new section is linked to its definition.</p>
-						
+
 						<p>ReSpec can handle differences in case between the link text and the defined term. It can also
 							account for most plural forms of words.</p>
-						
+
 						<p>If you intend to use a shorthand expression of the term (e.g., "reading system" instead of
 							"eBraille reading system", you need to define the alternative in the term definition using a
-							<code>data-lt</code> attribute.</p>
-						
+								<code>data-lt</code> attribute.</p>
+
 						<aside class="example" title="Defining an alternative term">
 							<pre><code>&lt;dt>&lt;dfn data-lt="reading system">
    eBraille Reading System
 &lt;/dfn>&lt;/dt></code></pre>
 						</aside>
-						
+
 						<p>If there is more than one alternative, use a vertical bar (<code>|</code>) to separate the
 							terms in the attribute.</p>
 					</section>
@@ -476,95 +579,96 @@
 
 			<section id="body">
 				<h3>Body matter</h3>
-				
+
 				<section id="refs">
 					<h4>References</h4>
-					
+
 					<section id="ref-specs">
 						<h5>To other specifications</h5>
-						
+
 						<p>When referencing another specification, you must cite the specification.</p>
-						
+
 						<p>ReSpec supports a shorthand syntax using brackets:</p>
 						<pre><code>[[shortname]]</code></pre>
-						
+
 						<p>To look up the shortname for a specification, go to <a href="https://specref.org"
-							>https://specref.org</a>.</p>
-						
+								>https://specref.org</a>.</p>
+
 						<p>References may be normative or informative.</p>
-						
+
 						<p>References inherit their status from the type of section they are in.</p>
-						
+
 						<p>To mark an informative reference in a normative section, add a question mark before the
 							shortname:</p>
 						<pre><code>[[?shortname]]</code></pre>
-						
+
 						<p>Normative references are not allowed in informative content.</p>
-						
+
 						<p>ReSpec automatically builds a references section and sorts the references into normative and
 							informative subsections.</p>
 					</section>
-					
+
 					<section id="ref-markup">
 						<h5>To elements and attributes</h5>
-						
-						<p>ReSpec also has a shorthand for linking to element and attributes in other specifications:</p>
+
+						<p>ReSpec also has a shorthand for linking to element and attributes in other
+							specifications:</p>
 						<pre><code>[^element^] [^element/attribute^]</code></pre>
-						
+
 						<p>Primarily used for linking to HTML and SVG.</p>
-						
-						<p>To look up elements and attributes you can reference, go to <a href="https://respec.org/xref/"
-							>https://respec.org/xref/</a>.</p>
-						
+
+						<p>To look up elements and attributes you can reference, go to <a
+								href="https://respec.org/xref/">https://respec.org/xref/</a>.</p>
+
 						<p>If an element or attribute is specified in more than one specification, you may need to tell
 							ReSpec which one you mean by adding a data-cite attribute:</p>
 						<pre><code>&lt;p data-cite="html">The [^link^] element [[html]] …&lt;/p></code></pre>
-						
+
 						<p>When citing elements and attributes, also cite the specification.</p>
 					</section>
 				</section>
-				
+
 				<section id="adding-notes">
 					<h4>Adding notes</h4>
-					
+
 					<p>Two main types of notes:</p>
-					
+
 					<ul>
 						<li>Regular notes inform readers about normative requirements</li>
 						<li>Editor's notes inform readers about issues to be addressed in the specification</li>
 					</ul>
-					
+
 					<p>To add a regular note, use the class "note":</p>
 					<pre><code>&lt;div class="note">
    &lt;p>Note text&lt;/p>
 &lt;/div></code></pre>
-					
+
 					<p>You can put the class on a paragraph, they're easy to miss when editing.</p>
-					
+
 					<p>For editor's note, use the class "ednote" instead.</p>
 				</section>
-				
+
 				<section id="adding-examples">
 					<h4>Adding examples</h4>
-					
+
 					<p>To add examples, use an <code>&lt;aside></code> element with the class "example".</p>
-					
+
 					<p>Add a title for the example using a title attribute.</p>
-					
+
 					<p>If necessary, add a description in a <code>&lt;p></code> tag.</p>
-					
+
 					<p>Use <code>&lt;pre></code> and <code>&lt;code></code> elements to wrap the example markup.</p>
-					
+
 					<p>Make sure to escape opening brackets in the example.</p>
 					<pre><code>&lt;aside class="example" title="Adding foo to bar">
    &lt;p>The example shows …&lt;/p>
    &lt;pre>&lt;code>&amp;lt;p> &amp;#8230;&amp;lt;/p>&lt;/code>&lt;/pre>
 &lt;/aside></code></pre>
-					
+
 					<p>ReSpec will automatically number examples.</p>
 				</section>
 			</section>
-			
+
 			<section id="backmatter">
 				<h3>Back matter</h3>
 
