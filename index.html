@@ -19,7 +19,7 @@
 				],
 				logos: [
 					{
-						src: 'common/images/daisy_high.jpg',
+						src: 'images/daisy_high.jpg',
 						width: 112,
 						height: 100,
 						alt: 'DAISY Consortium logo',
@@ -38,45 +38,70 @@
 		<section id="intro">
 			<h2>Introduction</h2>
 
-			<p></p>
+			<p>Finding people to write technical specifications is challenge enough, and the last anything wants when
+				taking on this kind of task is to be overwhelmed by the process of managing the documents. To help make
+				the process as smooth as possible, DAISY uses two widely implemented tools to help authors and editors
+				navigate the ins and outs of specification work: ReSpec and GitHub.</p>
+
+			<p>ReSpec is a tool that lets authors and editors focus on writing the text &#8212; it takes care of
+				formatting the document. Consequently, the only thing you have to know to write DAISY specifications is
+				some basic HTML. This guide introduces ReSpec and explains its authoring conventions.</p>
+
+			<p>GitHub is a content management system (CMS). Although commonly associated with coding projects, CMSes
+				provide a convenient way to author documents. The full authoring history of documents is always
+				available, for example, so you never have to worry about making mistakes. They are easily undone. GitHub
+				also allows others to review your changes before they are merged into a document.</p>
+
+			<p>Using GitHub can be a little more challenging than using ReSpec, but there are many user tools available
+				that can hide the technical details. This guide focuses on the underlying commands to help you
+				understand what happens at each stage of the process but is expected that you will use one of the
+				available tools to simplify the process.</p>
 		</section>
 		<section id="respec">
-			<h2>Respec</h2>
+			<h2>ReSpec</h2>
 
 			<section id="respec-intro">
 				<h3>Introduction</h3>
 
-				<p>Respec is a JavaScript tool developed by the W3C to make editing their specifications easier and more
+				<p>ReSpec is a JavaScript tool developed by the W3C to make editing their specifications easier and more
 					consistent. The code allows you to focus on writing the content of the specification, while it takes
 					care of adding common boilerplate and formatting when the document is viewed live.</p>
 
-				<p>Although developed for W3C, respec is no longer exclusively for developing W3C specifications. DAISY,
+				<p>Although developed for W3C, ReSpec is no longer exclusively for developing W3C specifications. DAISY,
 					for example, customizes a "base" profile to format its specifications and notes.</p>
 
-				<p>The functioning of respec is meant to be largely transparent to anyone editing specifications. Using
-					the tool only requires a script element to call in the respec code and a block of JSON metadata to
+				<p>The functioning of ReSpec is meant to be largely transparent to anyone editing specifications. Using
+					the tool only requires a script element to call in the ReSpec code and a block of JSON metadata to
 					initialize it. Once these are set, editors will primarily be working in HTML to author the content.
 					This means you can use whatever HTML editor you are most comfortable with.</p>
 
-				<p>This section covers the setup and initialization of respec. Information on how to tag HTML documents
-					to take advantage of respec's built-in formatting is covered in the next section on <a
+				<p>This section covers the setup and initialization of ReSpec. Information on how to tag HTML documents
+					to take advantage of ReSpec's built-in formatting is covered in the next section on <a
 						href="#editing">editing</a>.</p>
 
 				<div class="note">
-					<p>For detailed information on all aspects of respec, please visit the <a
-							href="https://respec.org/docs/">Respec Documentation</a>.</p>
+					<p>For detailed information on all aspects of ReSpec, please visit the <a
+							href="https://respec.org/docs/">ReSpec Documentation</a>.</p>
 				</div>
 			</section>
 
-			<section id="respec-init">
-				<h3>Initializing the code</h3>
+			<section id="respec-config">
+				<h3>Configuring a specification</h3>
 
-				<p>The respec source code is hosted at <code>https://www.w3.org/Tools/respec/respec-w3c</code></p>
+				<div class="note">
+					<p>Configuring a ReSpec document for the first time is typically done by DAISY staff. You can skip
+						this subsection if you are not interested in how the code is set up.</p>
+				</div>
 
-				<p>To call in this code, you only need to add a <code>script</code> tag to the HTML header.</p>
+				<section id="respec-add">
+					<h4>Adding the code</h4>
 
-				<aside title="Respec script tag">
-					<pre><code>&lt;html &#8230;>
+					<p>The ReSpec source code is hosted at <code>https://www.w3.org/Tools/respec/respec-w3c</code></p>
+
+					<p>To call in this code, you only need to add a <code>script</code> tag to the HTML header.</p>
+
+					<aside title="ReSpec script tag">
+						<pre><code>&lt;html &#8230;>
    &lt;head>
       &#8230;
       &lt;script
@@ -87,29 +112,30 @@
    &lt;/head>
    &#8230;
 &lt;/html></code></pre>
-				</aside>
+					</aside>
 
-				<p>Note the use of the <code>class</code> attribute value "<code>remove</code>" on the
-						<code>script</code> tag. This class ensures that respec will remove the <code>script</code> tag
-					(i.e., itself) when exporting a static version of the specification for publication.</p>
+					<p>Note the use of the <code>class</code> attribute value "<code>remove</code>" on the
+							<code>script</code> tag. This class ensures that ReSpec will remove the <code>script</code>
+						tag (i.e., itself) when exporting a static version of the specification for publication.</p>
 
-				<p>The only other requirement to get respec working is to add the <a href="#respec-metadata"
-						>initialization metadata</a>.</p>
-			</section>
+					<p>The only other requirement to get ReSpec working is to add the <a href="#respec-metadata"
+							>initialization metadata</a>.</p>
+				</section>
 
-			<section id="respec-metadata">
-				<h3>Adding the initialization metadata</h3>
+				<section id="respec-metadata">
+					<h4>Adding the initialization metadata</h4>
 
-				<p>Respec uses JSON metadata to initialize. This metadata is normally embedded in the <code>head</code>
-					of the HTML document using a <code>script</code> tag. Although it is possible to import the
-					metadata, doing so is not recommended. When stored outside the specification, the metadata is often
-					forgotten and not updated.</p>
+					<p>ReSpec uses JSON metadata to initialize. This metadata is normally embedded in the
+							<code>head</code> of the HTML document using a <code>script</code> tag. Although it is
+						possible to import the metadata, doing so is not recommended. When stored outside the
+						specification, the metadata is often forgotten and not updated.</p>
 
-				<p>The <code>script</code> tag must contain a <code>respecConfig</code> variable definition, which in
-					turn must be an object. They key/value pairs in this object define the intialization parameters.</p>
+					<p>The <code>script</code> tag must contain a <code>respecConfig</code> variable definition, which
+						in turn must be an object. They key/value pairs in this object define the intialization
+						parameters.</p>
 
-				<aside title="Respec metadata script tag and variable">
-					<pre><code>&lt;html &#8230;>
+					<aside title="ReSpec metadata script tag and variable">
+						<pre><code>&lt;html &#8230;>
    &lt;head>
       &#8230;
       &lt;script
@@ -124,28 +150,61 @@
    &lt;/head>
    &#8230;
 &lt;/html></code></pre>
-				</aside>
+					</aside>
 
-				<p>The initialization metadata controls such aspects of the document as the links at the top of the
-					document (current version, previous version, etc.), the lists of editors and authors, etc.</p>
+					<p>The initialization metadata controls such aspects of the document as the links at the top of the
+						document (current version, previous version, etc.), the lists of editors and authors, etc.</p>
 
-				<p>Setting the various metadata properties goes beyond this tutorial, however. Refer to the <a
-						href="https://respec.org/docs/">Respec Documentation</a> for more information.</p>
+					<p>Setting the various metadata properties goes beyond this tutorial, however. Refer to the <a
+							href="https://respec.org/docs/">ReSpec Documentation</a> for more information.</p>
+				</section>
+
+				<section id="respec-confirm">
+					<h4>Confirming the ReSpec setup</h4>
+
+					<p>Once the ReSpec code and initialization metadata are set, all you need to do to verify the setup
+						is open the document in a browser.</p>
+
+					<div class="note">
+						<p>Although you can open a ReSpec document on your local file system by double-clicking it, it
+							is often better to use a server like Apache or IIS to serve the document. If your
+							specification uses ReSpec file includes, for example, these will only work from a
+							server.</p>
+					</div>
+
+					<p>If the configuration is successful, you will get an HTML document with a table of contents on one
+						side and a ReSpec button positioned at the top left.</p>
+
+					<img src="images/respec-button.png" width="100" alt="Respec button" />
+
+					<p>If the ReSpec button is present, there is nothing else you need to do but reload the document to
+						view your changes as you go. If you click on the ReSpec button, it only provides options to
+						export the specification (for publication) and to search for references.</p>
+
+					<p>If the ReSpec button is missing, then initialization failed. In this case, check the browser's
+						JavaScript console (in the browser tools) for more information. The most common problem is
+						invalid JSON in the initialization metadata (e.g., a missing comma).</p>
+				</section>
 			</section>
 
 			<section id="respec-err-warn">
 				<h3>Errors and warnings</h3>
 
-				<p>Respec will alert you to any errors and warnings it can detect.</p>
+				<p>ReSpec will alert you to any errors and warnings it can detect.</p>
 
 				<p>For errors, a red oval button with a number indicating the number of errors will appear beside the
-					Respec box at the top of the document.</p>
+					ReSpec box at the top of the document.</p>
+
+				<img src="images/respec-errors.png" width="175" alt="Error indicator" />
 
 				<p>Click on the oval to get a list of errors.</p>
 
-				<p>Make sure all errors are fixed.</p>
-
 				<p>Warnings are the same, but the indicator is a yellow oval.</p>
+
+				<img src="images/respec-warnings.png" width="175" alt="Warning indicator" />
+
+				<p>Make sure all errors are fixed. Not all warnings need fixing but they need to be evaluated on a
+					case-by-case basis.</p>
 			</section>
 		</section>
 		<section id="editing">
@@ -157,17 +216,23 @@
 				<section id="title-and-subtitle">
 					<h4>Title and subtitle</h4>
 
-					<p>The title of the specification is specified in the <code>&lt;title></code> tag.</p>
+					<p>The title of the specification is specified in the document's <code>title</code> tag.</p>
 
-					<p>Respec automatically generates an <code>&lt;h1></code> in the body using the same value.</p>
+					<aside class="example" title="Setting the title for a specification">
+						<pre><code>&lt;html &#8230;>
+   &lt;head>
+      &lt;title>eBraille&lt;/title>
+   &lt;/head>
+   &#8230;
+&lt;/html></code></pre>
+					</aside>
 
-					<p>You can add an <code>&lt;h1 id="title"></code> to the body if you need html tags in the title,
-						but this is rare.</p>
+					<p>ReSpec automatically generates an <code>h1</code> in the body using the same value.</p>
 
-					<p>To add a subtitle, include an <code>&lt;h2 id="subtitle"></code> tag in the body.</p>
+					<p>You can add an <code>h1</code> tag with the id "<code>title</code>" to the body if you need html
+						tags in the title, but this is rare.</p>
 
-					<p>Subtitling specifications is usually rare, use an abstract section to describe the
-						specification.</p>
+					<p>To add a subtitle, include an <code>h2</code> tag with the id "<code>title</code>".</p>
 
 					<aside class="example" title="Inlined title and subtitle">
 						<pre><code>&lt;body>
@@ -180,12 +245,15 @@
 					<div class="note">
 						<p>Do not place the title and subtitle inside <code>section</code> tags.</p>
 					</div>
+
+					<p>Subtitling specifications is usually rare. Use an <a href="#spec-abstract">abstract</a> to
+						describe the specification.</p>
 				</section>
 
 				<section id="copyright">
 					<h4>Copyright</h4>
 
-					<p>Respec will automatically add a W3C copyright statement if one is not provided in the document.
+					<p>ReSpec will automatically add a W3C copyright statement if one is not provided in the document.
 						To avoid this behavior, add a DAISY copyright statement after the opening body tag.</p>
 
 					<aside class="example" title="DAISY copyright">
@@ -204,7 +272,7 @@
 				<section id="spec-abstract">
 					<h4>Abstract</h4>
 
-					<p>Respec requires every document have an abstract.</p>
+					<p>ReSpec requires every document have an abstract that briefly explains the document.</p>
 
 					<p>To add the abstract, include a <code>section</code> with the id "<code>abstract</code>".</p>
 
@@ -214,37 +282,48 @@
 &lt;/section></code></pre>
 					</aside>
 
-					<p>The abstract should only be a few sentences, at most. Leave longer explanations for an
+					<p>The abstract should only be a few sentences at most. Leave longer explanations for an
 						introductory section.</p>
 
 					<div class="note">
-						<p>Do not add a heading for the abstract. Respec will automatically add one.</p>
+						<p>Do not add a heading for the abstract. ReSpec will automatically add one.</p>
 					</div>
+
+					<p>If you are writing a document that does not need an abstract (e.g., a note), you can suppress the
+						section by adding the html <code>hidden</code> attribute. Removing the table of contents entry
+						requires scripting, however. Contact DAISY staff to help with this task.</p>
 				</section>
 
 				<section id="spec-sotd">
 					<h4>Status of this document</h4>
 
-					<p>Some specifications need a status section – typically only W3C.</p>
+					<p>DAISY specifications do not include status sections. Do not include a <code>section</code> tag
+						with the id "<code>sotd</code>" as this will trigger ReSpec to include W3C boilerplate.</p>
 
-					<p>A blank section with the id "sotd" is used to add a default status section:</p>
-					<pre><code>&lt;section id="sotd"/></code></pre>
+					<div class="note">
+						<p>There is no way to overwrite the W3C boilerplate. ReSpec will append any text you write in a
+							status section after the boilerplate.</p>
 
-					<p>Respec generates the boilerplate for this section based on the status of the specification.</p>
-
-					<p>Any content added inside the section is added after the boilerplate.</p>
+						<p>If DAISY specifications add status sections in the future, a new method for including them
+							will be developed.</p>
+					</div>
 				</section>
 
 				<section id="spec-toc">
 					<h4>Table of contents</h4>
 
-					<p>Respec automatically generates the table of contents from the heading structure.</p>
+					<p>ReSpec automatically generates the table of contents from the heading structure.</p>
 
-					<p>How many levels deep the table of contents go can be controlled by the metadata, but it is best
-						not to limit user access.</p>
+					<p>How many levels deep the table of contents go can be controlled by the <a href="#respec-metadata"
+							>initialization metadata</a>, but it is best not to limit user access.</p>
 
-					<p>Sections can be omitted from the table of contents by adding the class "noTOC" to them, but this
-						is rarely done.</p>
+					<p>Individual sections can be omitted from the table of contents by adding the class
+							"<code>noTOC</code>" to them.</p>
+
+					<div class="note">
+						<p>You cannot use the <code>noTOC</code> class to suppress required sections, like the <a
+								href="#spec-abstract">abstract</a>.</p>
+					</div>
 				</section>
 
 				<section id="spec-terminology">
@@ -252,10 +331,12 @@
 
 					<p>Common terminology can be defined in a terminology section.</p>
 
-					<p>Use a &lt;dl> tag for definition lists.</p>
+					<p>Use a <code>dl</code> tag for definition lists.</p>
 
 					<p>Each term definition must have a &lt;dfn> tag around the term:</p>
-					<pre><code>&lt;dl>
+					
+					<aside class="example">
+						<pre><code>&lt;dl>
    &lt;dt>&lt;dfn>Term&lt;/dfn>&lt;/dt>
    
    dd>
@@ -263,6 +344,8 @@
    &lt;/dd>
    &#8230;
 &lt;/dl></code></pre>
+						
+					</aside>
 
 					<p>Once a term is defined, you can reference it from an <code>&lt;a></code> tag anywhere in the
 						document:</p>
@@ -278,22 +361,22 @@
 				<section id="sections">
 					<h4>Using sections</h4>
 
-					<p>Respec looks for certain specially identified section elements, as explained later.</p>
+					<p>ReSpec looks for certain specially identified section elements, as explained later.</p>
 
 					<p>Although you can write the rest of the specification without using section elements, it is not
 						recommended – sectioning helps identify structural issues.</p>
 
-					<p>Respec will attempt to add sections when they are missing.</p>
+					<p>ReSpec will attempt to add sections when they are missing.</p>
 
 					<p>Every section must have a heading.</p>
 
-					<p>Ensure that the number of heading tag matches its nesting, but respect will also attempt to
+					<p>Ensure that the number of heading tag matches its nesting, but ReSpec will also attempt to
 						correct misnumbering.</p>
 
-					<p>The top-most sections must have &lt;h3> headings – respec uses &lt;h1> for the document
+					<p>The top-most sections must have &lt;h3> headings – ReSpec uses &lt;h1> for the document
 						title.</p>
 
-					<p>Respec will auto-number the headings.</p>
+					<p>ReSpec will auto-number the headings.</p>
 
 					<p>Specifications usually have the following top-level sections:</p>
 
@@ -310,7 +393,7 @@
 						<li>References</li>
 					</ul>
 
-					<p>Some of these sections are automatically generated by respec.</p>
+					<p>Some of these sections are automatically generated by ReSpec.</p>
 				</section>
 
 				<section id="normative-sections">
@@ -333,7 +416,7 @@
 					<p>Normative keywords must be in uppercase. Lowercase keywords have no normative weight, but it best
 						to avoid these as they confuse most readers.</p>
 
-					<p>Every specification needs a blank section with the id "conformance" – respec will add boilerplate
+					<p>Every specification needs a blank section with the id "conformance" – ReSpec will add boilerplate
 						language about the keywords:</p>
 					<pre><code>&lt;section id="conformance"/></code></pre>
 
@@ -362,7 +445,7 @@
 
 					<p>When referencing another specification, you must cite the specification.</p>
 
-					<p>Respec supports a shorthand syntax using brackets:</p>
+					<p>ReSpec supports a shorthand syntax using brackets:</p>
 					<pre><code>[[shortname]]</code></pre>
 
 					<p>To look up the shortname for a specification, go to <a href="https://specref.org"
@@ -378,14 +461,14 @@
 
 					<p>Normative references are not allowed in informative content.</p>
 
-					<p>Respec automatically builds a references section and sorts the references into normative and
+					<p>ReSpec automatically builds a references section and sorts the references into normative and
 						informative subsections.</p>
 				</section>
 
 				<section id="ref-markup">
 					<h4>To elements and attributes</h4>
 
-					<p>Respec also has a shorthand for linking to element and attributes in other specifications:</p>
+					<p>ReSpec also has a shorthand for linking to element and attributes in other specifications:</p>
 					<pre><code>[^element^] [^element/attribute^]</code></pre>
 
 					<p>Primarily used for linking to HTML and SVG.</p>
@@ -394,7 +477,7 @@
 							>https://respec.org/xref/</a>.</p>
 
 					<p>If an element or attribute is specified in more than one specification, you may need to tell
-						respec which one you mean by adding a data-cite attribute:</p>
+						ReSpec which one you mean by adding a data-cite attribute:</p>
 					<pre><code>&lt;p data-cite="html">The [^link^] element [[html]] …&lt;/p></code></pre>
 
 					<p>When citing elements and attributes, also cite the specification.</p>
@@ -438,7 +521,7 @@
    &lt;pre>&lt;code>&amp;lt;p> &amp;#8230;&amp;lt;/p>&lt;/code>&lt;/pre>
 &lt;/aside></code></pre>
 
-				<p>Respec will automatically number examples.</p>
+				<p>ReSpec will automatically number examples.</p>
 			</section>
 
 			<section id="backmatter">
@@ -455,14 +538,14 @@
 					<p>Appendixes are often informative, in which case add both classes:</p>
 					<pre><code>&lt;section class="appendix informative"></code></pre>
 
-					<p>Appendixes must be the last sections in the document - respec will convert all sections after the
+					<p>Appendixes must be the last sections in the document - ReSpec will convert all sections after the
 						first marked as an appendix to appendices, whether you wanted them as appendixes or not!</p>
 				</section>
 
 				<section id="spec-change-log">
 					<h4>Change log entries</h4>
 
-					<p>Respec currently doesn't help you out with change logs.</p>
+					<p>ReSpec currently doesn't help you out with change logs.</p>
 
 					<p>Change log entries should be dated and provide a concise description of the change.</p>
 
@@ -476,13 +559,13 @@
 			<section id="custom-css">
 				<h3>Custom styling</h3>
 
-				<p>Although respec provides a default look and feel, it does not cover everything you may need when
+				<p>Although ReSpec provides a default look and feel, it does not cover everything you may need when
 					writing a specification.</p>
 
 				<p>To use custom styling, simply add a <code>&lt;style></code> element to the document header with the
 					necessary css.</p>
 
-				<p>Do not change the appearance of specifications just because you don't like the respec defaults! Limit
+				<p>Do not change the appearance of specifications just because you don't like the ReSpec defaults! Limit
 					custom css to unhandled needs.</p>
 			</section>
 
@@ -875,7 +958,7 @@
 				<h3>Editing</h3>
 
 				<ul>
-					<li><a href="https://respec.org/docs/">Respec Documentation</a></li>
+					<li><a href="https://respec.org/docs/">ReSpec Documentation</a></li>
 					<li><a href="https://www.specref.org/">SpecRef Database</a></li>
 					<li><a href="https://respec.org/xref/">Cross-reference Database</a></li>
 					<li><a href="https://w3c.github.io/manual-of-style/">W3C Manual of Style</a></li>
