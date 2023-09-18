@@ -71,7 +71,7 @@
 					for example, customizes a "base" profile to format its specifications and notes.</p>
 
 				<p>The functioning of ReSpec is meant to be largely transparent to anyone editing specifications. Using
-					the tool only requires a script element to call in the ReSpec code and a block of JSON metadata to
+					the tool only requires a script tag to call in the ReSpec code and a block of JSON metadata to
 					initialize it. Once these are set, editors will primarily be working in HTML to author the content.
 					This means you can use whatever HTML editor you are most comfortable with.</p>
 
@@ -131,7 +131,7 @@
 						specification, the metadata is often forgotten and not updated.</p>
 
 					<p>The <code>script</code> tag must contain a <code>respecConfig</code> variable definition, which
-						in turn must be an object. They key/value pairs in this object define the intialization
+						in turn must be an object. They key/value pairs in this object define the initialization
 						parameters.</p>
 
 					<aside title="ReSpec metadata script tag and variable">
@@ -203,7 +203,7 @@
 
 				<img src="images/respec-warnings.png" width="175" alt="Warning indicator" />
 
-				<p>Make sure all errors are fixed. Not all warnings need fixing but they need to be evaluated on a
+				<p>Make sure all errors are fixed. Not all warnings need fixing, but they need to be evaluated on a
 					case-by-case basis.</p>
 			</section>
 		</section>
@@ -217,7 +217,7 @@
 					<h4>Using sections</h4>
 
 					<p>Section tags are an important part of structuring a specification, and you must author DAISY
-						specifications using <code>section</code> elements around each self-contained section of
+						specifications using <code>section</code> tags around each self-contained section of
 						content.</p>
 
 					<p>Every <code>section</code> tag should contain a unique ID in its <code>id</code> attribute.
@@ -234,16 +234,19 @@
 						uses <code>h1</code> for the document title.</p>
 
 					<div class="note">
-						<p>ReSpec will attempt to correct misnumbered heading tags but do not rely on this behavior.</p>
+						<p>ReSpec will attempt to correct misnumbered heading tags.</p>
 					</div>
+
+					<p>Use sentence case for headings &#8212; only the first letter is capitalized unless there are also
+						proper nouns in the title.</p>
 
 					<p>Do not add numbers your headings (e.g., "<code>&lt;h2>1. &#8230;&lt;/h2></code>"). ReSpec will
 						add the correct numbering based on whether the content is preliminary, body, or back matter.</p>
 
 					<div class="note">
 						<p>If a heading occurs without a <code>section</code> tag, ReSpec will attempt to add one to
-							match what it infers to be the correct structure. Be careful about relying on this kind of
-							auto-correction, however, as often leads to mis-structuring of subsections.</p>
+							match what it infers to be the correct structure (usually by making a subsection). Be
+							careful about relying on this kind of auto-correction.</p>
 					</div>
 				</section>
 
@@ -270,10 +273,10 @@
 						<ul>
 							<li><code>MUST</code>, <code>MUST NOT</code>, and <strong>REQUIRED</strong> – if the target
 								of the statement (content, reading system, etc.) does not meet these requirements it is
-								non-conforming</li>
+								non-conforming.</li>
 							<li><code>SHOULD</code>, <code>SHOULD NOT</code>, and <code>RECOMMENDED</code> – the target
 								of the statement should only deviate from these requirements if there is a good
-								reason</li>
+								reason.</li>
 							<li><code>MAY</code> and <code>OPTIONAL</code> – meeting these requirements is at the
 								discretion of the author or developer.</li>
 						</ul>
@@ -448,12 +451,12 @@
    &lt;/section>
 &lt;/section></code></pre>
 					</aside>
-						
-						<p>Do not mark the introduction as informative unless all the subsections it contains are also
+
+					<p>Do not mark the introduction as informative unless all the subsections it contains are also
 						informative.</p>
-						
-						<p>The following sections explain the most common subsections found in the introduction, but
-							you can add any additional explanatory subsections you need.</p>
+
+					<p>The following sections explain the most common subsections found in the introduction, but you can
+						add any additional explanatory subsections you need.</p>
 
 					<section id="spec-overview">
 						<h5>Overviews and Backgrounds</h5>
@@ -506,8 +509,8 @@
 						<p>If you do add content to the section, ReSpec adds it after the boilerplate it generates.</p>
 
 						<div class="note">
-							<p>If you are writing a informative note, not a specification, omit a conformance section.
-								ReSpec will emit a warning but this can be ignored.</p>
+							<p>If you are writing an informative note, not a specification, omit a conformance section.
+								ReSpec will emit a warning, but this can be ignored.</p>
 						</div>
 					</section>
 
@@ -580,90 +583,256 @@
 			<section id="body">
 				<h3>Body matter</h3>
 
+				<section id="body-write">
+					<h4>How to write the body</h4>
+
+					<p>Probably the toughest problem you will face when writing a specification is how to structure it
+						and what to write about.</p>
+
+					<p>Although there is no simple answer to how to write a specification, the best way to begin the
+						process is often to brainstorm a list of topics that you expect you will have to cover. Start by
+						coming up with a list of top-level concepts or technologies you expect to define and then work
+						at refining this list by filling in the subsections.</p>
+
+					<p>Do not worry about getting this initial outline perfect &#8230; finished specifications almost
+						never look anything like they did at the outset. You will only discover what you ultimately need
+						to add and how to arrange the information as you go.</p>
+
+					<p>Once you have an outline of topics, a useful next step is to think of a specification as a
+						teaching guide. You need to introduce your readers to the concepts in a logical sequence that
+						allows them to build on the aspects they have already learned. Try arranging your outline so
+						that readers do not depend on understanding concepts that are only explained later.</p>
+
+					<p>Finally, do not feel compelled to fill in a specification from top-to-bottom. Begin wherever you
+						feel most comfortable and work your way through. Some parts will be much easier to write than
+						others and will require less input from the group. Getting some easy wins will make the process
+						more rewarding than struggling with harder parts just because they come first.</p>
+
+					<div class="note">
+						<p>The rest of this section deals with writing conveniences provided by ReSpec.</p>
+					</div>
+				</section>
+
+				<section id="writing-guidelines">
+					<h3>Writing guidelines</h3>
+
+					<p>Use the following guidelines when writing DAISY specifications:</p>
+
+					<ul>
+						<li>Use US English spelling</li>
+						<li>Follow the Chicago Manual of Style grammar and formatting rules</li>
+						<li>Do not use contractions (don't, can't, etc.)</li>
+						<li>Do not use personal pronouns (I, we, you, etc.)</li>
+						<li>Write out acronyms the first time (except where the acronym has become an accepted word,
+							like HTML)</li>
+						<li>Do not use colloquialisms - assume an international audience</li>
+						<li>Prefer active voice ("Authors must &#8230;", "Reading systems must &#8230;"), but passive
+							voice is acceptable for specification writing</li>
+					</ul>
+				</section>
+
+				<section id="xrefs">
+					<h4>Cross-references</h4>
+
+					<p>To cross-reference another section in your specification, use an <code>a</code> tag that
+						references the ID of the section.</p>
+
+					<p>If you do not put any text in the <code>a</code> tag, ReSpec will automatically add the number
+						and title of the section. (You can also use ReSpec's triple bracket shorthand for referencing
+						sections this way: <code>[[[<code>#id</code>]]]</code>.)</p>
+
+					<aside class="example" title="Cross-reference with text label">
+						<pre><code>For more information, refer to the
+&lt;a href="#html-restrictions">HTML restrictions&lt;/a>.</code></pre>
+					</aside>
+
+					<aside class="example" title="Cross-reference without text label">
+						<p>In this example, if the section with the ID "html-restrictions" is the sixth in the document
+							and has the heading "HTML restricted elements", ReSpec will create the label "6. HTML
+							restricted elements" for the link.</p>
+						<pre><code>For more information, refer to
+&lt;a href="#html-restrictions">&lt;/a>.</code></pre>
+						<pre><code>For more information, refer to [[[#html-restrictions]]].</code></pre>
+					</aside>
+				</section>
+
 				<section id="refs">
-					<h4>References</h4>
+					<h4 id="ref-hd">References</h4>
 
-					<section id="ref-specs">
-						<h5>To other specifications</h5>
+					<section id="ref-specs" aria-labelledby="ref-hd ref-specs-hd">
+						<h5 id="ref-specs-hd">To other specifications</h5>
 
-						<p>When referencing another specification, you must cite the specification.</p>
+						<p>When referencing elements, attributes, definitions, concepts, etc. another specification, you
+							must cite the specification.</p>
 
-						<p>ReSpec supports a shorthand syntax using brackets:</p>
-						<pre><code>[[shortname]]</code></pre>
+						<p>ReSpec supports a shorthand syntax for specification references using two brackets on either
+							side of the specification's shortname: <code>[[\shortname]]</code></p>
 
-						<p>To look up the shortname for a specification, go to <a href="https://specref.org"
-								>https://specref.org</a>.</p>
+						<p>To find the shortname to use for a specification, go to <a href="https://specref.org"
+								>https://specref.org</a> (there is also a link to this page from the ReSpec button).</p>
 
-						<p>References may be normative or informative.</p>
+						<p>Specification references may be normative or informative. References inherit this designation
+							from the type of section they are in.</p>
 
-						<p>References inherit their status from the type of section they are in.</p>
+						<aside class="example" title="Normative reference">
+							<pre><code>&lt;section id="toc-req">
+   &lt;h2>Table of contents requirements&lt;/h2>
+   &lt;p>The table of contents MUST be defined in an [[html]] [^nav^] element.&lt;/p>
+   &#8230;
+&lt;/section></code></pre>
+						</aside>
 
-						<p>To mark an informative reference in a normative section, add a question mark before the
-							shortname:</p>
-						<pre><code>[[?shortname]]</code></pre>
+						<aside class="example" title="Informative reference in a note">
+							<p>Because notes are informative, the reference becomes informative.</p>
+							<pre><code>&lt;div class="note">
+   &lt;p>The [[html]] [^details^] element still has support issues
+      in some reading systems.&lt;/p>
+&lt;/div></code></pre>
+						</aside>
+
+						<p>If informative references are used in normative sections, you must mark the reference as
+							informative by adding a question mark before the shortname.</p>
+
+						<aside class="example" title="Informative reference in a normative section">
+							<pre><code>Images MUST include alternative text (e.g., in the [[?html]] [^img^]
+element's [^img/alt^] attribute).</code></pre>
+						</aside>
 
 						<p>Normative references are not allowed in informative content.</p>
 
-						<p>ReSpec automatically builds a references section and sorts the references into normative and
-							informative subsections.</p>
+						<p>ReSpec automatically builds a references section in the back matter and sorts the references
+							into normative and informative subsections.</p>
 					</section>
 
-					<section id="ref-markup">
-						<h5>To elements and attributes</h5>
+					<section id="ref-markup" aria-labelledby="ref-hd ref-markup-hd">
+						<h5 id="ref-markup-hd">To elements and attributes</h5>
 
-						<p>ReSpec also has a shorthand for linking to element and attributes in other
-							specifications:</p>
-						<pre><code>[^element^] [^element/attribute^]</code></pre>
+						<p>ReSpec also has a shorthand for linking to elements in other specifications using a bracket
+							and circumflex around the element's name: <code>[^<code>element</code>^]</code></p>
 
-						<p>Primarily used for linking to HTML and SVG.</p>
+						<aside class="example" title="Reference to the HTML iframe element">
+							<pre><code>The [[html]] [^iframe^] element &#8230;</code></pre>
+						</aside>
 
-						<p>To look up elements and attributes you can reference, go to <a
-								href="https://respec.org/xref/">https://respec.org/xref/</a>.</p>
+						<p>To reference an attribute, you typically add a slash after the element's name:
+									<code>[^<code>element/attribute</code>^]</code></p>
 
-						<p>If an element or attribute is specified in more than one specification, you may need to tell
-							ReSpec which one you mean by adding a data-cite attribute:</p>
-						<pre><code>&lt;p data-cite="html">The [^link^] element [[html]] …&lt;/p></code></pre>
+						<aside class="example" title="Reference to the HTML img element's src attribute">
+							<pre><code>The [^img/src^] attribute &#8230;</code></pre>
+						</aside>
 
-						<p>When citing elements and attributes, also cite the specification.</p>
+						<div class="note">
+							<p>ReSpec replaces the attribute shorthand with the attribute's actual name. In the previous
+								example, only "The <code>src</code> attribute" will appear in the rendered text.</p>
+						</div>
+
+						<p>Element and attribute shorthands are only available for HTML and SVG.</p>
+
+						<p>If you are unsure what shorthand to use, or are getting an error, go to <a
+								href="https://respec.org/xref/">https://respec.org/xref/</a> and make sure you have the
+							correct reference.</p>
+
+						<p>If more than one specification defines an element or attribute, you may need to tell ReSpec
+							which one you mean to reference by adding a <code>data-cite</code> attribute. The value of
+							this attribute is the same shorthand name you use to <a href="#ref-specs">reference the
+								specification</a>.</p>
+
+						<aside class="example" title="Identifying the link element's source">
+							<pre><code>&lt;p data-cite="html">The [[html]] [^link^] element …&lt;/p></code></pre>
+						</aside>
+					</section>
+
+					<section id="ref-concepts" aria-labelledby="ref-hd ref-concept-hd">
+						<h5 id="ref-concept-hd">To concepts and definitions</h5>
+
+						<p>Concepts and definitions are defined in <code>dfn</code> tags.</p>
+
+						<p>ReSpec has a shorthand for referencing these using a bracket and equals sign around the term:
+									<code>[=<code>term</code>=]</code></p>
+
+						<aside class="example" title="Referencing a concept">
+							<pre><code>&#8230; the &lt;dfn>base url of the container&lt;/dfn> is &#8230;
+&#8230;
+When appending the [=base url of the container=] &#8230;
+</code></pre>
+						</aside>
+
+						<p>Concepts can be defined either in the current specification or in another, like [[infra]] or
+							[[url]].</p>
 					</section>
 				</section>
 
 				<section id="adding-notes">
 					<h4>Adding notes</h4>
 
-					<p>Two main types of notes:</p>
+					<p>There are two main types of notes:</p>
 
-					<ul>
-						<li>Regular notes inform readers about normative requirements</li>
-						<li>Editor's notes inform readers about issues to be addressed in the specification</li>
-					</ul>
-
-					<p>To add a regular note, use the class "note":</p>
-					<pre><code>&lt;div class="note">
+					<dl>
+						<dt>Regular notes</dt>
+						<dd>
+							<p>Regular notes are like asides &#8230; they are used to informatively describe issues to
+								readers.</p>
+							<p>To add a note, use the class "<code>note</code>".</p>
+							<aside class="example" title="Typical note markup">
+								<pre><code>&lt;div class="note">
    &lt;p>Note text&lt;/p>
 &lt;/div></code></pre>
+							</aside>
+							<p>You can also add a descriptive caption using the <code>title</code> attribute but, this
+								is not commonly done for notes.</p>
+							<p>If a note is only a single paragraph, you can use the <code>note</code> class directly on
+								the paragraph tag. The one downside of this approach is that it makes notes slightly
+								hard to spot visually when editing (the extra <code>div</code> wrapper makes the
+								paragraph stand out from any others around it.</p>
+						</dd>
 
-					<p>You can put the class on a paragraph, they're easy to miss when editing.</p>
-
-					<p>For editor's note, use the class "ednote" instead.</p>
+						<dt>Editor's notes</dt>
+						<dd>
+							<p>Editor's notes inform readers about issues that are still to be addressed in the
+								specification.</p>
+							<p>To add an editor's note, use the class "<code>ednote</code>".</p>
+							<aside class="example" title="Typical editor note markup">
+								<pre><code>&lt;div class="ednote">
+   &lt;p>Note text&lt;/p>
+&lt;/div></code></pre>
+							</aside>
+							<div class="note">
+								<p>Editor's notes are only allowed while you are working on the specification. They must
+									be removed prior to final publication.</p>
+							</div>
+						</dd>
+					</dl>
 				</section>
 
 				<section id="adding-examples">
 					<h4>Adding examples</h4>
 
-					<p>To add examples, use an <code>&lt;aside></code> element with the class "example".</p>
+					<p>To add examples, use an <code>aside</code> tag with the class "<code>example</code>".</p>
 
-					<p>Add a title for the example using a title attribute.</p>
+					<p>Use the <code>title</code> attribute to add a descriptive caption for the example. It is strongly
+						recommended to title examples to make it easier for readers to understand their purpose.</p>
 
-					<p>If necessary, add a description in a <code>&lt;p></code> tag.</p>
+					<p>Use <code>&lt;pre></code> and <code>&lt;code></code> tags to wrap the example markup.</p>
 
-					<p>Use <code>&lt;pre></code> and <code>&lt;code></code> elements to wrap the example markup.</p>
-
-					<p>Make sure to escape opening brackets in the example.</p>
-					<pre><code>&lt;aside class="example" title="Adding foo to bar">
-   &lt;p>The example shows …&lt;/p>
+					<aside>
+						<pre><code>&lt;aside class="example" title="Adding foo to bar">
    &lt;pre>&lt;code>&amp;lt;p> &amp;#8230;&amp;lt;/p>&lt;/code>&lt;/pre>
 &lt;/aside></code></pre>
+					</aside>
+
+					<div class="note">
+						<p>Make sure to escape opening brackets in the example.</p>
+					</div>
+
+					<p>If necessary, you can add a more thorough description of the example using <code>&lt;p></code>
+						tags.</p>
+
+					<aside class="example" title="Example with description">
+						<pre><code>&lt;aside class="example" title="Adding bar to foo">
+   &lt;p>In the example, the foo is &#8230; &lt;/p>
+   &#8230;
+&lt;/aside></code></pre>
+					</aside>
 
 					<p>ReSpec will automatically number examples.</p>
 				</section>
@@ -675,28 +844,49 @@
 				<section id="adding-app">
 					<h4>Adding appendixes</h4>
 
-					<p>Marking a section as an appendix changes its numbering to alphabetic.</p>
+					<p>Marking a section as an appendix changes its numbering to alphabetic and signifies it is in the
+						back matter.</p>
 
-					<p>Add the class "appendix" to the section tag:</p>
-					<pre><code>&lt;section class="appendix"></code></pre>
+					<p>To indicate a section is an appendix, add the class <code>appendix</code> to its
+							<code>section</code> tag.</p>
 
-					<p>Appendixes are often informative, in which case add both classes:</p>
-					<pre><code>&lt;section class="appendix informative"></code></pre>
+					<aside class="example" title="A section marked as an appendix">
+						<pre><code>&lt;section class="appendix">
+   &#8230;
+&lt;/section></code></pre>
+					</aside>
 
-					<p>Appendixes must be the last sections in the document - ReSpec will convert all sections after the
+					<p>Appendixes are not informative by default, but they are typically used for informative content.
+						An informative class must be added if the appendix is not normative.</p>
+
+					<aside class="example" title="An informative appendix">
+						<pre><code>&lt;section class="appendix informative">
+   &#8230;
+&lt;/section></code></pre>
+					</aside>
+
+					<p>Appendixes must be the last sections in the document. ReSpec will convert all sections after the
 						first marked as an appendix to appendices, whether you wanted them as appendixes or not!</p>
 				</section>
 
 				<section id="spec-change-log">
 					<h4>Change log entries</h4>
 
-					<p>ReSpec currently doesn't help you out with change logs.</p>
+					<p>ReSpec currently does not help you out with change logs.</p>
 
-					<p>Change log entries should be dated and provide a concise description of the change.</p>
+					<p>Change log entries should be dated and provide a concise description of the change. Best practice
+						is to also include a link to the GitHub issue for each entry.</p>
 
-					<p>Best practice is to include a link to the github issue for each entry.</p>
+					<aside>
+						<pre><code>&lt;li>
+   2023-10-12 &#8212; Updated parsing algorithm for the
+   table of contents. Refer to &lt;a
+   href="https://www.github.com/daisy/ex/issues/234">issue
+   234&lt;/a>.
+&lt;/li></code></pre>
+					</aside>
 
-					<p>A change log may not be needed for a new specification, but can help readers track changes since
+					<p>A change log may not be needed for a new specification but can help readers track changes since
 						the last publication.</p>
 				</section>
 			</section>
@@ -707,26 +897,11 @@
 				<p>Although ReSpec provides a default look and feel, it does not cover everything you may need when
 					writing a specification.</p>
 
-				<p>To use custom styling, simply add a <code>&lt;style></code> element to the document header with the
-					necessary css.</p>
+				<p>To use custom styling, simply add a <code>style</code> tag to the document header with the necessary
+					CSS.</p>
 
-				<p>Do not change the appearance of specifications just because you don't like the ReSpec defaults! Limit
-					custom css to unhandled needs.</p>
-			</section>
-
-			<section id="writing-tips">
-				<h3>Writing tips</h3>
-
-				<ul>
-					<li>Use US English spellings</li>
-					<li>Follow Chicago Manual of Style grammar and formatting rules</li>
-					<li>Do not use contractions</li>
-					<li>Do not use personal pronouns (I, we, you, etc.)</li>
-					<li>Do not capitalize "web"</li>
-					<li>Spell out acronyms the first time (except where the acronym has become an accepted word, like
-						HTML)</li>
-					<li>Link the first use of terms to their definitions</li>
-				</ul>
+				<p>Do not change the appearance of specifications just because you do not like the ReSpec defaults!
+					Limit custom CSS to unhandled needs.</p>
 			</section>
 		</section>
 		<section id="github">
