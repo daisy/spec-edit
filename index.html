@@ -57,51 +57,587 @@
 				understand what happens at each stage of the process but is expected that you will use one of the
 				available tools to simplify the process.</p>
 		</section>
-		<section id="respec">
-			<h2>ReSpec</h2>
+		<section id="github">
+			<h2>Using GitHub</h2>
 
-			<section id="respec-intro">
+			<section id="github-intro">
 				<h3>Introduction</h3>
 
-				<p>ReSpec is a JavaScript tool developed by the W3C to make editing their specifications easier and more
-					consistent. The code allows you to focus on writing the content of the specification, while it takes
-					care of adding common boilerplate and formatting when the document is viewed live.</p>
+				<p>GitHub is a cloud-based service that uses git repositories to store and manage development projects.
+					It is also a web site through which you can easily maintain repositories.</p>
 
-				<p>Although developed for W3C, ReSpec is no longer exclusively for developing W3C specifications. DAISY,
-					for example, customizes a "base" profile to format its specifications and notes.</p>
+				<p>Although commonly thought of as a home for open source code projects, GitHub is useful for any
+					project where versioning and tracking of documents is important. It is for this reason that DAISY,
+					W3C, and other publishers use GitHub for document development.</p>
 
-				<p>The functioning of ReSpec is meant to be largely transparent to anyone editing specifications. Using
-					the tool only requires a script tag to call in the ReSpec code and a block of JSON metadata to
-					initialize it. Once these are set, editors will primarily be working in HTML to author the content.
-					This means you can use whatever HTML editor you are most comfortable with.</p>
+				<p>GitHub (the web site) includes some web-based tools for editing files in a repository, but it is more
+					common for developers to download repositories to their local machines to work on and then submit
+					their changes back to the site. This makes it easy to collaborate with others through the web site
+					and track what is happening.</p>
 
-				<p>This section covers the setup and initialization of ReSpec. Information on how to tag HTML documents
-					to take advantage of ReSpec's built-in formatting is covered in the next section on <a
-						href="#editing">editing</a>.</p>
+				<p>This section goes through the process of checking out and working on the files in a repository, as
+					this is how you will manage the writing and editing of DAISY specifications. As there are many tools
+					available to simplify the document management process, this guide focuses on the underlying git
+					commands. Once you understand these commands, you will find it much easier to understand the
+					graphical user interfaces to GitHub.</p>
+			</section>
+
+			<section id="github-tools">
+				<h3>Tools for managing repositories</h3>
+
+				<p>The following list introduces some of the most common tools used to manage GitHub repositories. You
+					will need to install at least one of these tools before you will be able to checkout files and edit
+					them.</p>
+
+				<dl>
+					<dt><a href="https://git-scm.com/">Git command line</a></dt>
+					<dd>
+						<p>The git command line is the most basic way to interact with git repositories.</p>
+						<p>If you are comfortable with command line tools and do not mind memorizing the various git
+							commands, it may be all you need to manage your work locally.</p>
+					</dd>
+
+					<dt><a href="https://desktop.github.com/">GitHub Desktop</a></dt>
+					<dd>
+						<p>The GitHub desktop is an application that runs on your local computer. It provides a
+							graphical user interface for checking out repositories and maintaining the files in them. As
+							it comes integrated with GitHub and sets up a connection with your user account, it is very
+							beginner friendly.</p>
+						<p>One bonus of installing GitHub desktop is that it will install the git command line for you,
+							so you can switch to the command line without having to run a separate install.</p>
+					</dd>
+
+					<dt><a href="https://tortoisegit.org/">TortoiseGit</a></dt>
+					<dd>
+						<p>TortoiseGit is an application that runs on Windows systems. It integrates with your
+							right-click context menu, allowing you to manage repositories from the file system
+							explorer.</p>
+						<p>In addition to providing easy access to many common git commands, TortoiseGit also uses icon
+							overlays to display which folders and files have changes. Unfortunately, these overlays are
+							only accessible to sighted users.</p>
+					</dd>
+
+					<dt><a href="https://github.com">GitHub web site</a></dt>
+					<dd>
+						<p>Although the GitHub web site is not an installable application, and does not directly allow
+							you to download repositories, it does provide some basic tools for maintaining repositories
+							and editing files.</p>
+						<p>The GitHub site is the only way to open and comment on <a href="#pull-requests">pull
+								requests</a>, for example, so you cannot avoid using it. It also allows you to do light
+							modifications on files if you are in a hurry, but it is not recommended for extensive
+							editing.</p>
+					</dd>
+				</dl>
+			</section>
+
+			<section id="github-workflow">
+				<h3>Specification editing workflow</h3>
+
+				<p>The typical GitHub workflow for editing a specification is as follows:</p>
+
+				<ol>
+					<li><a href="#clone-repo">Clone</a> the repository to your local machine.</li>
+					<li><a href="#branch-create">Create a branch</a> to work in.</li>
+					<li><a href="#editing">Edit</a> the file(s).</li>
+					<li><a href="#commits">Commit</a> your changes.</li>
+					<li><a href="#push-changes">Push</a> your changes back to the site.</li>
+					<li>Open a <a href="#pull-requests">pull request</a>.</li>
+					<li>Repeat from step 2 as needed.</li>
+				</ol>
+
+				<p>The following sections will go into these steps in more detail.</p>
+			</section>
+
+			<section id="clone-repo">
+				<h4>Cloning repositories</h4>
+
+				<p>Cloning a repository downloads a copy of the repository to your local machine. Cloning is the
+					preferred work mode for DAISY specifications.</p>
+
+				<p>The two most common ways to clone a repository are directly from GitHub and from the git command
+					line.</p>
+
+				<dl>
+					<dt>From the GitHub web site:</dt>
+					<dd>
+						<ol>
+							<li>Go to the site for the repository.</li>
+							<li>
+								<p>Click on the "<code>&lt;> Code</code>" button.</p>
+								<figure>
+									<figcaption>GitHub code tab</figcaption>
+									<img src="./images/code-tab.png" width="500" alt="" />
+									<details>
+										<summary>Description</summary>
+										<p>The image shows the top of the eBraille repository as it appears on the
+											GitHub web site. The green "Code" button is rendered at the right edge of
+											the page on a line of links and buttons after the repository name.</p>
+									</details>
+								</figure>
+								<p>(Note for screen reader users that this "button" is actually a <code>details</code>
+									element styled like a button.)</p>
+							</li>
+							<li>
+								<p>From the drop-down menu, select "Open with GitHub Desktop" to download. (If you are
+									using a different application, this link should open that program instead; you do
+									not have to install GitHub Desktop for this step.)</p>
+								<figure>
+									<figcaption>Code menu</figcaption>
+									<img src="./images/code-menu.png" width="300" alt="" />
+									<details>
+										<summary>Description</summary>
+										<p>The image shows the clone option that appears by default in the drop-down
+											menu box. The URL for the repository is shown followed by a link to open
+											with GitHub desktop and a link to download a ZIP file with the source.</p>
+									</details>
+								</figure>
+							</li>
+							<li>You will be prompted where to save the repository on your local filesystem.</li>
+						</ol>
+						<div class="note">
+							<p>Do not download the zipped source. This option only gives you the files without any of
+								the other necessary repository information for your git tools to work with them.</p>
+						</div>
+					</dd>
+
+					<dt>From the git command line:</dt>
+					<dd>
+						<ol>
+							<li>Create a directory for your repositories if necessary.</li>
+							<li>Open the command line terminal for your operating system.</li>
+							<li>Switch to the directory from step 1.</li>
+							<li>Open the GitHub web site for the repository in your browser and copy the URL.</li>
+							<li>
+								<p>Clone the repository with the command:</p>
+								<pre><code>git clone &lt;URL></code></pre>
+								<p>Replacing "&lt;URL>" with the URL from step 4.</p>
+								<aside class="example" title="Command to clone the DAISY eBraille repository">
+									<pre><code>git clone https://github.com/daisy/ebraille/</code></pre>
+								</aside>
+							</li>
+						</ol>
+						<div class="note">
+							<p>git will automatically create a new subdirectory for the source files using the name of
+								the repository.</p>
+						</div>
+					</dd>
+				</dl>
 
 				<div class="note">
-					<p>For detailed information on all aspects of ReSpec, please visit the <a
-							href="https://respec.org/docs/">ReSpec Documentation</a>.</p>
+					<p>Another process for working on a repository is called forking. Forking a repository makes a copy
+						of the repository under your GitHub account. You then clone that repository and work on it and
+						make a pull request back to the source repository when you are done.</p>
+
+					<p>Forking is typically only used when you do not have access to edit the source repository. If you
+						need access to a DAISY repository, make a request to DAISY staff.</p>
 				</div>
 			</section>
 
-			<section id="respec-config">
-				<h3>Configuring a specification</h3>
+			<section id="branches">
+				<h3>Branches</h3>
 
-				<div class="note">
-					<p>Configuring a ReSpec document for the first time is typically done by DAISY staff. You can skip
-						this subsection if you are not interested in how the code is set up.</p>
-				</div>
+				<section id="branch-intro">
+					<h4>Overview</h4>
 
-				<section id="respec-add">
-					<h4>Adding the code</h4>
+					<p>Branches are like copies of the repository source that allow you to work on files without
+						directly changing the primary source. After you have finished making all your changes, you
+						request that your changes be merged back into the source (through what is called a "<a
+							href="#pull-requests">pull request</a>").</p>
 
-					<p>The ReSpec source code is hosted at <code>https://www.w3.org/Tools/respec/respec-w3c</code></p>
+					<p>All DAISY specification should be done through branches and pull requests. Do not work directly
+						in the "main" branch (the primary source) as it does not give others a chance to review your
+						changes.</p>
+				</section>
 
-					<p>To call in this code, you only need to add a <code>script</code> tag to the HTML header.</p>
+				<section id="branch-create">
+					<h4>Create a branch</h4>
 
-					<aside title="ReSpec script tag">
-						<pre><code>&lt;html &#8230;>
+					<p>When creating a branch, try to give it a short but unique name. For example, name the branch
+						after the issue number it addresses.</p>
+
+					<p>You can also add a prefix using a slash to the name make branches more specific (e.g.,
+						"metadata/explain-title").</p>
+
+					<div class="note">
+						<p>Branch names must not contain spaces. Some tools will allow you to enter spaces in the name
+							but will convert them to dashes when creating the actual branch.</p>
+					</div>
+
+					<p>This section reviews creating branches from the GitHub web site and the command line, but most
+						applications for managing repositories can simplify this process for you.</p>
+
+					<dl>
+						<dt>From the GitHub web site:</dt>
+						<dd>
+							<ol>
+								<li>Go to the "Code" tab of the repository.</li>
+								<li>
+									<p>Click the button that shows the main branch.</p>
+									<figure>
+										<figcaption>Main branch button</figcaption>
+										<img src="./images/branch-button.png" width="250" alt="" />
+										<details>
+											<summary>Description</summary>
+											<p>The image shows the main branch button. It is positioned under the name
+												of the repository on the Code tab.</p>
+										</details>
+									</figure>
+									<p>(Note for screenreader users that this "button" is actually a
+											<code>details</code> element with the summary "Click branches or tags".)</p>
+								</li>
+								<li>
+									<p>Type a name for your branch in the input box.</p>
+									<figure>
+										<figcaption>Branch input field</figcaption>
+										<img src="./images/branch-input.png" width="300" alt="" />
+										<details>
+											<summary>Description</summary>
+											<p>The image shows the drop-down field after clicking on the main branch
+												button. There is a text input field followed by the names of some
+												existing branches.</p>
+										</details>
+									</figure>
+								</li>
+								<li>
+									<p>Click the option to create the branch.</p>
+									<figure>
+										<figcaption>Branch create option</figcaption>
+										<img src="./images/branch-create.png" width="300" alt="" />
+										<details>
+											<summary>Description</summary>
+											<p>The image shows the option to create the branch that appears once a name
+												has been typed into the input field.</p>
+										</details>
+									</figure>
+								</li>
+							</ol>
+							<div class="note">
+								<p>When creating a branch on the GitHub web site, you will need to <a
+										href="#pull-updates">pull the change</a> to your local repository and <a
+										href="#branch-switch">switch to the branch</a> before editing the files.</p>
+							</div>
+						</dd>
+
+						<dt>From the git command line:</dt>
+						<dd>
+							<ol>
+								<li>Open the command line terminal for your operating system.</li>
+								<li>Switch to the root of the directory containing the repository source.</li>
+								<li>Make sure the "main" branch is checked out when creating new branches (see <a
+										href="#branch-switch"></a> for more information).</li>
+								<li>
+									<p>Create and switch to the new branch with the command:</p>
+									<pre><code>git checkout -b [branch-name]</code></pre>
+									<p>Replacing "[branch-name]" with the name for your branch.</p>
+								</li>
+								<li>
+									<p>Push the new branch to GitHub with the command:</p>
+									<pre><code>git push [branch-name]</code></pre>
+								</li>
+							</ol>
+						</dd>
+					</dl>
+				</section>
+
+				<section id="branch-switch">
+					<h4>Switching branches</h4>
+
+					<p>Following are some common commands for switching branches from the git command line:</p>
+
+					<ul>
+						<li>
+							<p>To switch to an existing branch, run:</p>
+							<pre><code>git checkout [branch-name]</code></pre>
+							<p>(Replacing "[branch-name]" with the actual name of the branch.)</p>
+						</li>
+
+						<li>
+							<p>To switch to the main branch, run:</p>
+							<pre><code>git checkout main</code></pre>
+						</li>
+
+						<li>
+							<p>To view the current branch you are in, run:</p>
+							<pre><code>git branch --show-current</code></pre>
+						</li>
+					</ul>
+				</section>
+
+				<section id="branch-delete">
+					<h4>Deleting branches</h4>
+
+					<p>If you are no longer using a branch, delete it &#8212; stale branches are confusing to sift
+						through later.</p>
+
+					<dl>
+						<dt>From the GitHub web site:</dt>
+						<dd>
+							<ol>
+								<li>Go to the Code tab of the repository</li>
+								<li>Click on the "Branches" button</li>
+								<li>Click on the garbage can icon next to the branch (button with the label "Delete
+									branch-name")</li>
+							</ol>
+						</dd>
+
+						<dt>From the git command line:</dt>
+						<dd>
+							<p>To delete from the command line, run:</p>
+							<pre><code>git push origin –-delete branch-name</code></pre>
+						</dd>
+					</dl>
+					<div class="note">
+						<p>Branches in DAISY repositories are typically set to be deleted automatically when a pull
+							request is merged. You should not need to delete these manually.</p>
+					</div>
+				</section>
+			</section>
+
+			<section id="repo-changes">
+				<h3>Managing changes</h3>
+
+				<section id="pull-updates">
+					<h4>Pulling the latest updates</h4>
+
+					<p>Running a "pull" request gets the recent commits, branches, etc., from the source repository.</p>
+
+					<p>If you create a branch in GitHub, you need to run a pull request first before you can check it
+						out to work on it.</p>
+
+					<p>To perform a pull request, run:</p>
+					<pre><code>git pull</code></pre>
+				</section>
+
+				<section id="commits">
+					<h4>Committing changes</h4>
+
+					<p>Committing saves local changes – allows you to view new changes.</p>
+
+					<p>Commits require you to include messages explaining your changes.</p>
+
+					<p>To make a commit, run:</p>
+					<pre><code>git commit –a –m "explanatory message"</code></pre>
+
+					<p>Note you have to "add" changed files before you can commit the changes.</p>
+
+					<p>You can commit changes to individual files or multiple files.</p>
+
+					<p>Commits can be made without pushing them to GitHub.</p>
+				</section>
+
+				<section id="file-maintenance">
+					<h4>File maintenance</h4>
+
+					<p>To add a file to the repository, run:</p>
+					<pre><code>git add filename.xyz</code></pre>
+
+					<p>To add all unversioned files, run:</p>
+					<pre><code>git add -a</code></pre>
+
+					<p>To check for unversioned files, run:</p>
+					<pre><code>git ls-files --other</code></pre>
+
+					<p>To delete a file, run:</p>
+					<pre><code>git rm filename.xyz</code></pre>
+
+					<p>To rename a file, run:</p>
+					<pre><code>git mv oldname.xyz newname.xyz</code></pre>
+				</section>
+
+				<section id="push-changes">
+					<h4>Pushing changes</h4>
+
+					<p>Pushing changes to GitHub saves them remotely.</p>
+
+					<p>To push commits, run:</p>
+					<pre><code>git push origin branch-name</code></pre>
+
+					<p>Undoing commits once they've been pushed can be tricky – more of a danger if pushing straight to
+						main.</p>
+
+					<p>Pushing to a branch does not open a pull request.</p>
+
+					<p>Users are not notified of pushes to branches if no pull request is open.</p>
+				</section>
+
+				<section id="stash-changes">
+					<h4>Stashing changes</h4>
+
+					<p>Sometimes you need to changes branches or work on another issue while still editing.</p>
+
+					<p>Stashing your changes stores them away and leaves the branch "clean".</p>
+
+					<p>When you come back to the branch, you can "pop" the changes from the stash to continue working
+						(or pop them in a new branch).</p>
+
+					<p>To stash changes, run:</p>
+					<pre><code>git stash push –m "stash message"</code></pre>
+
+					<p>To view all stashed changes, run:</p>
+					<pre><code>git stash list</code></pre>
+
+					<p>To pop the top-most changes, run:</p>
+					<pre><code>git pop</code></pre>
+				</section>
+			</section>
+
+			<section id="pull-requests">
+				<h3>Pull requests</h3>
+
+				<section id="open-pr">
+					<h4>Opening a pull request</h4>
+
+					<p>Go to the "Pull requests" section of the repository on Github.</p>
+
+					<p>Click the "New pull request" button.</p>
+
+					<p>Use a descriptive title.</p>
+
+					<p>Describe the changes.</p>
+
+					<p>Link a related issue using # followed by the issue number.</p>
+
+					<p>Automatically close an issue when merged by adding "Fixes" before the issue number – "Fixes
+						#23".</p>
+				</section>
+
+				<section id="request-reviews">
+					<h4>Request reviews</h4>
+
+					<p>Pull requests should always be reviewed by at least one other editor before merging.</p>
+
+					<p>It is best to pick editors also involved with the issue you are addressing, but if in doubt never
+						worry about asking for too many reviewers.</p>
+
+					<p>If you don't request a review, editor's may not be aware you want their input.</p>
+
+					<p>To request a review, go to the "Reviewers" section in the pull request and click on the
+						heading.</p>
+
+					<p>Enter the GitHub usernames of the people you want to review and select their accounts.</p>
+
+					<p>If you are an editor, you can merge your pull request after receiving approvals.</p>
+
+					<p>If you are not an editor, let the editors decide when to merge.</p>
+				</section>
+
+				<section id="review-pr">
+					<h4>Reviewing pull requests</h4>
+
+					<p>Open the pull request to review.</p>
+
+					<p>Click on the "Add your review" button or select the "Files changed" tab.</p>
+
+					<p>Click on "Review changes" and select approve if everything is okay.</p>
+
+					<p>Otherwise, add comments to the changes by clicking on the + button (labelled "Add line
+						comment").</p>
+
+					<p>Select the closest line for comments to avoid confusion.</p>
+
+					<p>Click "Start a review" if you expect to add more than one comment, otherwise click "Add single
+						comment".</p>
+
+					<p>Click the "Finish your review" button to post your comments.</p>
+
+					<p>Select either "Comment" if they are suggestions or "Request changes" if fixes are needed.</p>
+
+					<p>To make general comments not specific to the changed source, use the text box at the bottom of
+						the Conversation tab.</p>
+				</section>
+
+				<section id="edit-pr">
+					<h4>Editing a pull request</h4>
+
+					<p>Sometimes you might want to make a change to another person's pull request – to fix a typo, or
+						modify the text after a discussion.</p>
+
+					<p>Follow these steps:</p>
+
+					<ol>
+						<li>Pull the latest data</li>
+						<li>Checkout the branch used to create the pull request</li>
+						<li>Modify the files</li>
+						<li>Commit and push the changes</li>
+					</ol>
+
+					<p>The pull request is automatically updated with the commit.</p>
+
+					<p>Users will be notified of changes to an open pull request.</p>
+				</section>
+
+				<section id="pr-on-pr">
+					<h4>Pull requests on pull requests</h4>
+
+					<p>Sometimes you may want to propose extensive changes to a pull request and have them reviewed
+						before modifying the original pull request.</p>
+
+					<p>Follow these steps:</p>
+
+					<ol>
+						<li>Pull the latest data</li>
+						<li>Checkout the branch used to create the pull request</li>
+						<li>Create a new branch</li>
+						<li>Checkout the new branch</li>
+						<li>Modify the files</li>
+						<li>Commit the changes</li>
+						<li>Open a new pull request</li>
+					</ol>
+
+					<p>When opening the new pull request, make sure the base branch is not "main".</p>
+				</section>
+			</section>
+		</section>
+		<section id="editing">
+			<h2>Editing specifications</h2>
+
+			<section id="respec">
+				<h3>ReSpec</h3>
+
+				<section id="respec-intro">
+					<h4>Introduction</h4>
+
+					<p>ReSpec is a JavaScript tool developed by the W3C to make editing their specifications easier and
+						more consistent. The code allows you to focus on writing the content of the specification, while
+						it takes care of adding common boilerplate and formatting when the document is viewed live.</p>
+
+					<p>Although developed for W3C, ReSpec is no longer exclusively for developing W3C specifications.
+						DAISY, for example, customizes a "base" profile to format its specifications and notes.</p>
+
+					<p>The functioning of ReSpec is meant to be largely transparent to anyone editing specifications.
+						Using the tool only requires a script tag to call in the ReSpec code and a block of JSON
+						metadata to initialize it. Once these are set, editors will primarily be working in HTML to
+						author the content. This means you can use whatever HTML editor you are most comfortable
+						with.</p>
+
+					<p>This section covers the setup and initialization of ReSpec. Information on how to tag HTML
+						documents to take advantage of ReSpec's built-in formatting is covered in the next section on <a
+							href="#editing">editing</a>.</p>
+
+					<div class="note">
+						<p>For detailed information on all aspects of ReSpec, please visit the <a
+								href="https://respec.org/docs/">ReSpec Documentation</a>.</p>
+					</div>
+				</section>
+
+				<section id="respec-config">
+					<h4>Configuring a specification</h4>
+
+					<div class="note">
+						<p>Configuring a ReSpec document for the first time is typically done by DAISY staff. You can
+							skip this subsection if you are not interested in how the code is set up.</p>
+					</div>
+
+					<section id="respec-add">
+						<h5>Adding the code</h5>
+
+						<p>The ReSpec source code is hosted at
+							<code>https://www.w3.org/Tools/respec/respec-w3c</code></p>
+
+						<p>To call in this code, you only need to add a <code>script</code> tag to the HTML header.</p>
+
+						<aside title="ReSpec script tag">
+							<pre><code>&lt;html &#8230;>
    &lt;head>
       &#8230;
       &lt;script
@@ -112,30 +648,31 @@
    &lt;/head>
    &#8230;
 &lt;/html></code></pre>
-					</aside>
+						</aside>
 
-					<p>Note the use of the <code>class</code> attribute value "<code>remove</code>" on the
-							<code>script</code> tag. This class ensures that ReSpec will remove the <code>script</code>
-						tag (i.e., itself) when exporting a static version of the specification for publication.</p>
+						<p>Note the use of the <code>class</code> attribute value "<code>remove</code>" on the
+								<code>script</code> tag. This class ensures that ReSpec will remove the
+								<code>script</code> tag (i.e., itself) when exporting a static version of the
+							specification for publication.</p>
 
-					<p>The only other requirement to get ReSpec working is to add the <a href="#respec-metadata"
-							>initialization metadata</a>.</p>
-				</section>
+						<p>The only other requirement to get ReSpec working is to add the <a href="#respec-metadata"
+								>initialization metadata</a>.</p>
+					</section>
 
-				<section id="respec-metadata">
-					<h4>Adding the initialization metadata</h4>
+					<section id="respec-metadata">
+						<h5>Adding the initialization metadata</h5>
 
-					<p>ReSpec uses JSON metadata to initialize. This metadata is normally embedded in the
-							<code>head</code> of the HTML document using a <code>script</code> tag. Although it is
-						possible to import the metadata, doing so is not recommended. When stored outside the
-						specification, the metadata is often forgotten and not updated.</p>
+						<p>ReSpec uses JSON metadata to initialize. This metadata is normally embedded in the
+								<code>head</code> of the HTML document using a <code>script</code> tag. Although it is
+							possible to import the metadata, doing so is not recommended. When stored outside the
+							specification, the metadata is often forgotten and not updated.</p>
 
-					<p>The <code>script</code> tag must contain a <code>respecConfig</code> variable definition, which
-						in turn must be an object. They key/value pairs in this object define the initialization
-						parameters.</p>
+						<p>The <code>script</code> tag must contain a <code>respecConfig</code> variable definition,
+							which in turn must be an object. They key/value pairs in this object define the
+							initialization parameters.</p>
 
-					<aside title="ReSpec metadata script tag and variable">
-						<pre><code>&lt;html &#8230;>
+						<aside title="ReSpec metadata script tag and variable">
+							<pre><code>&lt;html &#8230;>
    &lt;head>
       &#8230;
       &lt;script
@@ -150,65 +687,64 @@
    &lt;/head>
    &#8230;
 &lt;/html></code></pre>
-					</aside>
+						</aside>
 
-					<p>The initialization metadata controls such aspects of the document as the links at the top of the
-						document (current version, previous version, etc.), the lists of editors and authors, etc.</p>
+						<p>The initialization metadata controls such aspects of the document as the links at the top of
+							the document (current version, previous version, etc.), the lists of editors and authors,
+							etc.</p>
 
-					<p>Setting the various metadata properties goes beyond this tutorial, however. Refer to the <a
-							href="https://respec.org/docs/">ReSpec Documentation</a> for more information.</p>
+						<p>Setting the various metadata properties goes beyond this tutorial, however. Refer to the <a
+								href="https://respec.org/docs/">ReSpec Documentation</a> for more information.</p>
+					</section>
+
+					<section id="respec-confirm">
+						<h5>Confirming the ReSpec setup</h5>
+
+						<p>Once the ReSpec code and initialization metadata are set, all you need to do to verify the
+							setup is open the document in a browser.</p>
+
+						<div class="note">
+							<p>Although you can open a ReSpec document on your local file system by double-clicking it,
+								it is often better to use a server like Apache or IIS to serve the document. If your
+								specification uses ReSpec file includes, for example, these will only work from a
+								server.</p>
+						</div>
+
+						<p>If the configuration is successful, you will get an HTML document with a table of contents on
+							one side and a ReSpec button positioned at the top left.</p>
+
+						<img src="images/respec-button.png" width="100" alt="Respec button" />
+
+						<p>If the ReSpec button is present, there is nothing else you need to do but reload the document
+							to view your changes as you go. If you click on the ReSpec button, it only provides options
+							to export the specification (for publication) and to search for references.</p>
+
+						<p>If the ReSpec button is missing, then initialization failed. In this case, check the
+							browser's JavaScript console (in the browser tools) for more information. The most common
+							problem is invalid JSON in the initialization metadata (e.g., a missing comma).</p>
+					</section>
 				</section>
 
-				<section id="respec-confirm">
-					<h4>Confirming the ReSpec setup</h4>
+				<section id="respec-err-warn">
+					<h4>Errors and warnings</h4>
 
-					<p>Once the ReSpec code and initialization metadata are set, all you need to do to verify the setup
-						is open the document in a browser.</p>
+					<p>ReSpec will alert you to any errors and warnings it can detect.</p>
 
-					<div class="note">
-						<p>Although you can open a ReSpec document on your local file system by double-clicking it, it
-							is often better to use a server like Apache or IIS to serve the document. If your
-							specification uses ReSpec file includes, for example, these will only work from a
-							server.</p>
-					</div>
+					<p>For errors, a red oval button with a number indicating the number of errors will appear beside
+						the ReSpec box at the top of the document.</p>
 
-					<p>If the configuration is successful, you will get an HTML document with a table of contents on one
-						side and a ReSpec button positioned at the top left.</p>
+					<img src="images/respec-errors.png" width="175" alt="Error indicator" />
 
-					<img src="images/respec-button.png" width="100" alt="Respec button" />
+					<p>Click on the oval to get a list of errors.</p>
 
-					<p>If the ReSpec button is present, there is nothing else you need to do but reload the document to
-						view your changes as you go. If you click on the ReSpec button, it only provides options to
-						export the specification (for publication) and to search for references.</p>
+					<p>Warnings are the same, but the indicator is a yellow oval.</p>
 
-					<p>If the ReSpec button is missing, then initialization failed. In this case, check the browser's
-						JavaScript console (in the browser tools) for more information. The most common problem is
-						invalid JSON in the initialization metadata (e.g., a missing comma).</p>
+					<img src="images/respec-warnings.png" width="175" alt="Warning indicator" />
+
+					<p>Make sure all errors are fixed. Not all warnings need fixing, but they need to be evaluated on a
+						case-by-case basis.</p>
 				</section>
 			</section>
-
-			<section id="respec-err-warn">
-				<h3>Errors and warnings</h3>
-
-				<p>ReSpec will alert you to any errors and warnings it can detect.</p>
-
-				<p>For errors, a red oval button with a number indicating the number of errors will appear beside the
-					ReSpec box at the top of the document.</p>
-
-				<img src="images/respec-errors.png" width="175" alt="Error indicator" />
-
-				<p>Click on the oval to get a list of errors.</p>
-
-				<p>Warnings are the same, but the indicator is a yellow oval.</p>
-
-				<img src="images/respec-warnings.png" width="175" alt="Warning indicator" />
-
-				<p>Make sure all errors are fixed. Not all warnings need fixing, but they need to be evaluated on a
-					case-by-case basis.</p>
-			</section>
-		</section>
-		<section id="editing">
-			<h2>Editing</h2>
 
 			<section id="spec-structure">
 				<h3>Sectioning specifications</h3>
@@ -904,361 +1440,6 @@ When appending the [=base url of the container=] &#8230;
 					Limit custom CSS to unhandled needs.</p>
 			</section>
 		</section>
-		<section id="github">
-			<h2>GitHub repositories</h2>
-
-			<section id="github-tools">
-				<h3>Tools</h3>
-
-				<dl>
-					<dt><a href="https://git-scm.com/">Git command line</a></dt>
-					<dd>
-						<ul>
-							<li>Pros: extensive functionality</li>
-							<li>Cons: difficult to learn/remember the commands, have to manually store GitHub
-								credentials</li>
-						</ul>
-					</dd>
-
-					<dt><a href="">GitHub web site</a></dt>
-					<dd>
-						<ul>
-							<li>Pros: easy to use, essential for some actions</li>
-							<li>Cons: limited functionality, not always accessible</li>
-						</ul>
-					</dd>
-
-					<dt><a href="https://desktop.github.com/">GitHub Desktop</a></dt>
-					<dd>
-						<ul>
-							<li>Pros: graphical interface, installs git command line</li>
-							<li>Cons: not always intuitive</li>
-						</ul>
-					</dd>
-
-					<dt><a href="https://tortoisegit.org/">TortoiseGit</a></dt>
-					<dd>
-						<ul>
-							<li>Pros: easy to use, ability to run most commands, overlays to show changed files</li>
-							<li>Cons: Windows-only, only available in right-click context menu, overlays not
-								accessible</li>
-						</ul>
-					</dd>
-				</dl>
-			</section>
-
-			<section id="repos-manage">
-				<h3>Managing repositories</h3>
-
-				<section id="clone-v-fork">
-					<h4>Cloning v. forking repositories</h4>
-
-					<dl>
-						<dt>Cloning</dt>
-						<dd>
-							<p>Cloning a repository downloads a copy of the repository to your local machine.</p>
-							<p>After cloning, create branches to work on changes.</p>
-							<p>After editing, you create a pull request from the branch in the source repository.</p>
-							<p>Cloning is the preferred work mode for editors.</p>
-						</dd>
-
-						<dt>Forking</dt>
-						<dd>
-							<p>Forking a repository makes a copy under your GitHub account.</p>
-							<p>Forking is used when you don't have access to edit the source repository.</p>
-							<p>You still need to clone your fork to your local machine to edit the files.</p>
-							<p>After editing, you create a pull request to the original repository from the fork.</p>
-							<p>You don't have to use branches to edit, but they are advised.</p>
-							<p>Forks are more difficult to work with as you have to keep your fork up-to-date.</p>
-						</dd>
-					</dl>
-				</section>
-
-				<section id="repo-checkout">
-					<h4>Checking out a repository</h4>
-
-					<p>From GitHub</p>
-
-					<p>Go to the repository.</p>
-
-					<p>Click on the "<code>&lt;> Code</code>" button.</p>
-
-					<p>Select "Open with GitHub Desktop" to download.</p>
-
-					<p>You will be prompted where to save the repository.</p>
-
-					<p>From the command line.</p>
-
-					<p>Create a directory for your repositories.</p>
-
-					<p>Get the URL of the repository - for example, <code>https://github.com/daisy/ebraille</code>.</p>
-
-					<p>Run the command:</p>
-					<pre><code>git clone https://github.com/daisy/ebraille</code></pre>
-
-					<p>A new subdirectory named "ebraille" will be created with the source.</p>
-				</section>
-			</section>
-
-			<section id="pull-requests">
-				<h3>Pull requests</h3>
-
-				<section id="open-pr">
-					<h4>Opening a pull request</h4>
-
-					<p>Go to the "Pull requests" section of the repository on Github.</p>
-
-					<p>Click the "New pull request" button.</p>
-
-					<p>Use a descriptive title.</p>
-
-					<p>Describe the changes.</p>
-
-					<p>Link a related issue using # followed by the issue number.</p>
-
-					<p>Automatically close an issue when merged by adding "Fixes" before the issue number – "Fixes
-						#23".</p>
-				</section>
-
-				<section id="request-reviews">
-					<h4>Request reviews</h4>
-
-					<p>Pull requests should always be reviewed by at least one other editor before merging.</p>
-
-					<p>It is best to pick editors also involved with the issue you are addressing, but if in doubt never
-						worry about asking for too many reviewers.</p>
-
-					<p>If you don't request a review, editor's may not be aware you want their input.</p>
-
-					<p>To request a review, go to the "Reviewers" section in the pull request and click on the
-						heading.</p>
-
-					<p>Enter the GitHub usernames of the people you want to review and select their accounts.</p>
-
-					<p>If you are an editor, you can merge your pull request after receiving approvals.</p>
-
-					<p>If you are not an editor, let the editors decide when to merge.</p>
-				</section>
-
-				<section id="review-pr">
-					<h4>Reviewing pull requests</h4>
-
-					<p>Open the pull request to review.</p>
-
-					<p>Click on the "Add your review" button or select the "Files changed" tab.</p>
-
-					<p>Click on "Review changes" and select approve if everything is okay.</p>
-
-					<p>Otherwise, add comments to the changes by clicking on the + button (labelled "Add line
-						comment").</p>
-
-					<p>Select the closest line for comments to avoid confusion.</p>
-
-					<p>Click "Start a review" if you expect to add more than one comment, otherwise click "Add single
-						comment".</p>
-
-					<p>Click the "Finish your review" button to post your comments.</p>
-
-					<p>Select either "Comment" if they are suggestions or "Request changes" if fixes are needed.</p>
-
-					<p>To make general comments not specific to the changed source, use the text box at the bottom of
-						the Conversation tab.</p>
-				</section>
-
-				<section id="edit-pr">
-					<h4>Editing a pull request</h4>
-
-					<p>Sometimes you might want to make a change to another person's pull request – to fix a typo, or
-						modify the text after a discussion.</p>
-
-					<p>Follow these steps:</p>
-
-					<ol>
-						<li>Pull the latest data</li>
-						<li>Checkout the branch used to create the pull request</li>
-						<li>Modify the files</li>
-						<li>Commit and push the changes</li>
-					</ol>
-
-					<p>The pull request is automatically updated with the commit.</p>
-
-					<p>Users will be notified of changes to an open pull request.</p>
-				</section>
-
-				<section id="pr-on-pr">
-					<h4>Pull requests on pull requests</h4>
-
-					<p>Sometimes you may want to propose extensive changes to a pull request and have them reviewed
-						before modifying the original pull request.</p>
-
-					<p>Follow these steps:</p>
-
-					<ol>
-						<li>Pull the latest data</li>
-						<li>Checkout the branch used to create the pull request</li>
-						<li>Create a new branch</li>
-						<li>Checkout the new branch</li>
-						<li>Modify the files</li>
-						<li>Commit the changes</li>
-						<li>Open a new pull request</li>
-					</ol>
-
-					<p>When opening the new pull request, make sure the base branch is not "main".</p>
-				</section>
-			</section>
-
-			<section id="branches">
-				<h3>Branches</h3>
-
-				<section id="branch-create">
-					<h4>Create a branch</h4>
-
-					<p>From GitHub</p>
-
-					<p>Go to the "Code" section of the repository.</p>
-
-					<p>Click the button that shows the Main branch.</p>
-
-					<p>Is actually a details element with the summary "Click branches or tags".</p>
-
-					<p>Enter a name for your branch and click the option to create it.</p>
-
-					<p>From the command line.</p>
-
-					<p>From the directory containing the repository source, run:</p>
-					<pre><code>git branch branch-name</code></pre>
-
-					<p>Try to make branch names short but unique – e.g., name after the issue number it addresses.</p>
-
-					<p>Add a prefix to make the branch name more specific – e.g., "metadata/xyz".</p>
-
-					<p>Make sure you are in the "main" branch when creating new branches.</p>
-				</section>
-
-				<section id="branch-switch">
-					<h4>Switching branches</h4>
-
-					<p>To change to another branch, run:</p>
-					<pre><code>git checkout branch-name</code></pre>
-
-					<p>To view the current branch you are in, run:</p>
-					<pre><code>git branch --show-current</code></pre>
-
-					<p>To switch back to the main branch, run:</p>
-					<pre><code>git checkout main</code></pre>
-				</section>
-
-				<section id="branch-delete">
-					<h4>Deleting branches</h4>
-
-					<p>If you are no longer using a branch, delete it -- stale branches are confusing to sift through
-						later.</p>
-
-					<p>You can delete branches in GitHub as follows:</p>
-
-					<ol>
-						<li>Go to the Code tab of the repository</li>
-						<li>Click on the "Branches" button</li>
-						<li>Click on the garbage can icon next to the branch (button with the label "Delete
-							branch-name")</li>
-					</ol>
-
-					<p>To delete from the command line, run:</p>
-					<pre><code>git push origin –-delete branch-name</code></pre>
-
-					<p>Branches are automatically deleted from the eBraille repository when a pull request is
-						merged.</p>
-				</section>
-			</section>
-
-			<section id="repo-changes">
-				<h3>Managing changes</h3>
-
-				<section id="pull-updates">
-					<h4>Pulling the latest updates</h4>
-
-					<p>Running a "pull" request gets the recent commits, branches, etc., from the source repository.</p>
-
-					<p>If you create a branch in GitHub, you need to run a pull request first before you can check it
-						out to work on it.</p>
-
-					<p>To perform a pull request, run:</p>
-					<pre><code>git pull</code></pre>
-				</section>
-
-				<section id="commits">
-					<h4>Committing changes</h4>
-
-					<p>Committing saves local changes – allows you to view new changes.</p>
-
-					<p>Commits require you to include messages explaining your changes.</p>
-
-					<p>To make a commit, run:</p>
-					<pre><code>git commit –a –m "explanatory message"</code></pre>
-
-					<p>Note you have to "add" changed files before you can commit the changes.</p>
-
-					<p>You can commit changes to individual files or multiple files.</p>
-
-					<p>Commits can be made without pushing them to GitHub.</p>
-				</section>
-
-				<section id="file-maintenance">
-					<h4>File maintenance</h4>
-
-					<p>To add a file to the repository, run:</p>
-					<pre><code>git add filename.xyz</code></pre>
-
-					<p>To add all unversioned files, run:</p>
-					<pre><code>git add -a</code></pre>
-
-					<p>To check for unversioned files, run:</p>
-					<pre><code>git ls-files --other</code></pre>
-
-					<p>To delete a file, run:</p>
-					<pre><code>git rm filename.xyz</code></pre>
-
-					<p>To rename a file, run:</p>
-					<pre><code>git mv oldname.xyz newname.xyz</code></pre>
-				</section>
-
-				<section id="push-changes">
-					<h4>Pushing changes</h4>
-
-					<p>Pushing changes to GitHub saves them remotely.</p>
-
-					<p>To push commits, run:</p>
-					<pre><code>git push origin branch-name</code></pre>
-
-					<p>Undoing commits once they've been pushed can be tricky – more of a danger if pushing straight to
-						main.</p>
-
-					<p>Pushing to a branch does not open a pull request.</p>
-
-					<p>Users are not notified of pushes to branches if no pull request is open.</p>
-				</section>
-
-				<section id="stash-changes">
-					<h4>Stashing changes</h4>
-
-					<p>Sometimes you need to changes branches or work on another issue while still editing.</p>
-
-					<p>Stashing your changes stores them away and leaves the branch "clean".</p>
-
-					<p>When you come back to the branch, you can "pop" the changes from the stash to continue working
-						(or pop them in a new branch).</p>
-
-					<p>To stash changes, run:</p>
-					<pre><code>git stash push –m "stash message"</code></pre>
-
-					<p>To view all stashed changes, run:</p>
-					<pre><code>git stash list</code></pre>
-
-					<p>To pop the top-most changes, run:</p>
-					<pre><code>git pop</code></pre>
-				</section>
-			</section>
-		</section>
 		<section id="resources">
 			<h2>Helpful resources</h2>
 
@@ -1281,7 +1462,6 @@ When appending the [=base url of the container=] &#8230;
 					<li><a href="https://respec.org/docs/">ReSpec Documentation</a></li>
 					<li><a href="https://www.specref.org/">SpecRef Database</a></li>
 					<li><a href="https://respec.org/xref/">Cross-reference Database</a></li>
-					<li><a href="https://w3c.github.io/manual-of-style/">W3C Manual of Style</a></li>
 					<li><a href="https://www.chicagomanualofstyle.org/home.html">Chicago Manual of Style</a></li>
 				</ul>
 			</section>
