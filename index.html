@@ -66,7 +66,7 @@
 				<p>GitHub is a cloud-based service that uses git repositories to store and manage development projects.
 					It is also a web site through which you can easily maintain repositories.</p>
 
-				<p>Although commonly thought of as a home for open source code projects, GitHub is useful for any
+				<p>Although commonly thought of as a home for open-source code projects, GitHub is useful for any
 					project where versioning and tracking of documents is important. It is for this reason that DAISY,
 					W3C, and other publishers use GitHub for document development.</p>
 
@@ -369,27 +369,53 @@
 					<p>If you are no longer using a branch, delete it &#8212; stale branches are confusing to sift
 						through later.</p>
 
+					<div class="note">
+						<p>Branches in DAISY repositories are typically set to be deleted automatically when a pull
+							request is merged. You do not need to delete these manually.</p>
+					</div>
+
 					<dl>
 						<dt>From the GitHub web site:</dt>
 						<dd>
 							<ol>
 								<li>Go to the Code tab of the repository</li>
-								<li>Click on the "Branches" button</li>
-								<li>Click on the garbage can icon next to the branch (button with the label "Delete
-									branch-name")</li>
+								<li>
+									<p>Below the repository name is a count of branches. Click on this text to load the
+										list of branches.</p>
+									<figure>
+										<figcaption>List of branches</figcaption>
+										<img src="./images/branch-button.png" width="250" alt="" />
+										<details>
+											<summary>Description</summary>
+											<p>The image shows the number of branches in the repository (3). The link is
+												beside the button to add branches.</p>
+										</details>
+									</figure>
+								</li>
+								<li>
+									<p>Locate the branch you want to delete from the list on the new page.</p>
+									<figure>
+										<figcaption>Branch entry with delete button</figcaption>
+										<img src="./images/branch-delete.png" width="500" alt="" />
+										<details>
+											<summary>Description</summary>
+											<p>The image shows an entry for a branch named "test/pr-preview". At the end
+												of the entry is the garbage can icon for deleting the branch.</p>
+										</details>
+									</figure>
+								</li>
+								<li>Click on the garbage can icon next to the branch &#8212; the button has label
+									"Delete" followed by the branch name.</li>
 							</ol>
 						</dd>
 
 						<dt>From the git command line:</dt>
 						<dd>
-							<p>To delete from the command line, run:</p>
-							<pre><code>git push origin –-delete branch-name</code></pre>
+							<p>To delete a branch from the command line, run the command:</p>
+							<pre><code>git push origin –-delete [branch-name]</code></pre>
+							<p>Replacing "[branch-name]" with the name of the branch to delete.</p>
 						</dd>
 					</dl>
-					<div class="note">
-						<p>Branches in DAISY repositories are typically set to be deleted automatically when a pull
-							request is merged. You should not need to delete these manually.</p>
-					</div>
 				</section>
 			</section>
 
@@ -399,173 +425,370 @@
 				<section id="pull-updates">
 					<h4>Pulling the latest updates</h4>
 
-					<p>Running a "pull" request gets the recent commits, branches, etc., from the source repository.</p>
+					<p>Running a "pull" command gets the latest commits, branches, etc., from the source repository.</p>
 
-					<p>If you create a branch in GitHub, you need to run a pull request first before you can check it
-						out to work on it.</p>
-
-					<p>To perform a pull request, run:</p>
+					<p>To perform a pull command, run:</p>
 					<pre><code>git pull</code></pre>
+
+					<p>You should always run a pull command before starting new work on a specification to ensure your
+						copy of the repository is up to date.</p>
+
+					<div class="note">
+						<p>If you create a branch in GitHub, you need to run a pull command first before you can check
+							it out to work on it.</p>
+					</div>
 				</section>
 
 				<section id="commits">
 					<h4>Committing changes</h4>
 
-					<p>Committing saves local changes – allows you to view new changes.</p>
-
-					<p>Commits require you to include messages explaining your changes.</p>
+					<p>Committing your changes saves them with git. Some people like to commit often (e.g., with each
+						minor change) while other prefer to commit only when they are done all their changes. Either
+						approach is fine.</p>
 
 					<p>To make a commit, run:</p>
 					<pre><code>git commit –a –m "explanatory message"</code></pre>
 
-					<p>Note you have to "add" changed files before you can commit the changes.</p>
+					<p>The "<code>-a</code>" flag in the preceding commands "adds" all changed files to your commit.
+						Although a bit counter-intuitive, you must "add" changed files even if they already exist in the
+						repository.</p>
 
-					<p>You can commit changes to individual files or multiple files.</p>
+					<p>The "<code>-m</code>" flag indicates the commit includes an explanatory message. For DAISY
+						specifications, please always describe your commits. The description does not need to be long,
+						but should make clear what you are committing.</p>
 
-					<p>Commits can be made without pushing them to GitHub.</p>
-				</section>
+					<div class="note">
+						<p>Making commits does not push the changes to GitHub. Until you <a href="#push-changes"
+								>push</a> them to the GitHub server, the changes will only exist in your local copy of
+							the repository.</p>
+					</div>
 
-				<section id="file-maintenance">
-					<h4>File maintenance</h4>
+					<section id="file-maintenance">
+						<h5>File maintenance</h5>
 
-					<p>To add a file to the repository, run:</p>
-					<pre><code>git add filename.xyz</code></pre>
+						<p>Although most commits involve edits to a specification, it is also common to make changes to
+							the file structure of a repository (e.g., add images to a specification, or move or rename
+							files). The following list details some common file maintenance commands. Running these
+							commands still requires a commit.</p>
 
-					<p>To add all unversioned files, run:</p>
-					<pre><code>git add -a</code></pre>
+						<ul>
+							<li>
+								<p>To add a single file to the repository, run:</p>
+								<pre><code>git add filename.xyz</code></pre>
+							</li>
 
-					<p>To check for unversioned files, run:</p>
-					<pre><code>git ls-files --other</code></pre>
+							<li>
+								<p>To add all unversioned files, run:</p>
+								<pre><code>git add -a</code></pre>
+							</li>
 
-					<p>To delete a file, run:</p>
-					<pre><code>git rm filename.xyz</code></pre>
+							<li>
+								<p>To check for unversioned files, run:</p>
+								<pre><code>git ls-files --other</code></pre>
+							</li>
 
-					<p>To rename a file, run:</p>
-					<pre><code>git mv oldname.xyz newname.xyz</code></pre>
-				</section>
+							<li>
+								<p>To delete a file, run:</p>
+								<pre><code>git rm filename.xyz</code></pre>
+							</li>
 
-				<section id="push-changes">
-					<h4>Pushing changes</h4>
-
-					<p>Pushing changes to GitHub saves them remotely.</p>
-
-					<p>To push commits, run:</p>
-					<pre><code>git push origin branch-name</code></pre>
-
-					<p>Undoing commits once they've been pushed can be tricky – more of a danger if pushing straight to
-						main.</p>
-
-					<p>Pushing to a branch does not open a pull request.</p>
-
-					<p>Users are not notified of pushes to branches if no pull request is open.</p>
+							<li>
+								<p>To rename a file, run:</p>
+								<pre><code>git mv oldname.xyz newname.xyz</code></pre>
+							</li>
+						</ul>
+					</section>
 				</section>
 
 				<section id="stash-changes">
 					<h4>Stashing changes</h4>
 
-					<p>Sometimes you need to changes branches or work on another issue while still editing.</p>
+					<p>Sometimes you may need to change branches or work on another issue while in the middle of
+						editing. If you are not ready to commit the changes you have made, another option is to stash
+						them.</p>
 
-					<p>Stashing your changes stores them away and leaves the branch "clean".</p>
+					<p>Stashing your changes stores them away in a stack and returns your branch to an unmodified
+						state.</p>
 
-					<p>When you come back to the branch, you can "pop" the changes from the stash to continue working
-						(or pop them in a new branch).</p>
+					<p>When you return to the branch and are ready to continue editing, you can then "pop" the changes
+						from the stash. (Note that you can pop the changes anywhere you want, so you can also pop the
+						branches in a new branch if you prefer to start anew.)</p>
 
-					<p>To stash changes, run:</p>
-					<pre><code>git stash push –m "stash message"</code></pre>
+					<p>The most common stash commands are:</p>
 
-					<p>To view all stashed changes, run:</p>
-					<pre><code>git stash list</code></pre>
+					<ul>
+						<li>
+							<p>To stash changes, run:</p>
+							<pre><code>git stash</code></pre>
+							<p>or</p>
+							<pre><code>git stash save "reminder message"</code></pre>
+							<p>It is best to add a message to remind you what you were working on, as it is easy to
+								forget what is in the stash if you have to go away to another issue for a long time.</p>
+						</li>
 
-					<p>To pop the top-most changes, run:</p>
-					<pre><code>git pop</code></pre>
+						<li>
+							<p>To view the list of stashed changes, run:</p>
+							<pre><code>git stash list</code></pre>
+						</li>
+
+						<li>
+							<p>To pop the top-most changes, run:</p>
+							<pre><code>git pop</code></pre>
+						</li>
+					</ul>
+				</section>
+
+				<section id="push-changes">
+					<h4>Pushing changes</h4>
+
+					<p>To store your changes (<a href="#commits">commits</a>) on GitHub, you have to "push" them to the
+						server.</p>
+
+					<p>To push commits, run:</p>
+					<pre><code>git push origin [branch-name]</code></pre>
+
+					<p>Replacing "[branch-name]" with the name of the branch you are working in.</p>
+
+					<p>As with committing, some people prefer to push their changes often while others prefer to wait
+						until they are done. An advantage of pushing changes to GitHub often is that you know they are
+						securely saved in case anything happens to your machine. A disadvantage is that undoing a commit
+						once you have pushed it is more complicated (this is a bigger problem if you are working
+						directly in the "main" branch where changes can go live right away).</p>
+
+					<div class="note">
+						<p>Pushing your changes to GitHub does not <a href="#open-pr">open a pull request</a> to review
+							and integrate your updates. That is the final step in the process.</p>
+					</div>
 				</section>
 			</section>
 
 			<section id="pull-requests">
 				<h3>Pull requests</h3>
 
+				<div class="note">
+					<p>This section assumes you will use the GitHub web site, but GitHub Desktop can also manage pull
+						requests.</p>
+
+					<p>Many third-party tools, such as the git command line and TortoiseGit, are not able to create pull
+						requests in GitHub.</p>
+				</div>
+
 				<section id="open-pr">
 					<h4>Opening a pull request</h4>
 
-					<p>Go to the "Pull requests" section of the repository on Github.</p>
+					<p>A pull request is the final step in the editing process. After you have made all your edits, you
+						need to open a pull request to have them merged back into the source specification.</p>
 
-					<p>Click the "New pull request" button.</p>
+					<p>To open a pull request from the GitHub web site:</p>
 
-					<p>Use a descriptive title.</p>
+					<ol>
+						<li>
+							<p>Go to the "Pull requests" tab of the repository on GitHub.</p>
+						</li>
 
-					<p>Describe the changes.</p>
+						<li>
+							<p>GitHub should offer to open a new pull request for the changes. If not, click the "New
+								pull request" button.</p>
+							<figure>
+								<figcaption>Alert to open pull request</figcaption>
+								<img src="./images/pr-open.png" width="700" alt="" />
+								<details>
+									<summary>Description</summary>
+									<p>The image shows the alert field that appears when you go to the pull request tab
+										in GitHub after pushing changes to a branch. If this alert is no present, the
+										"New pull request" button is visible in the row of options beneath the
+										alert.</p>
+								</details>
+							</figure>
+						</li>
 
-					<p>Link a related issue using # followed by the issue number.</p>
+						<li>
+							<p>Add a descriptive title for your pull request.</p>
+							<figure>
+								<figcaption>Example title for a pull request</figcaption>
+								<img src="./images/pr-title.png" width="450" alt="" />
+							</figure>
+						</li>
 
-					<p>Automatically close an issue when merged by adding "Fixes" before the issue number – "Fixes
-						#23".</p>
+						<li>
+							<p>Describe the changes as fully as you can.</p>
+							<p>If the changes fix an issue in the GitHub issue tracker, add "Fixes #xx" to the
+								description (replacing xx with the actual issue number). This will automatically close
+								the issue when the pull request is merged.</p>
+							<figure>
+								<figcaption>Example description for a pull request</figcaption>
+								<img src="./images/pr-desc.png" width="600" alt="" />
+							</figure>
+						</li>
+
+						<li>
+							<p>Click the "Create pull request" button after the description box to open the pull
+								request.</p>
+							<figure>
+								<figcaption>Create pull request button</figcaption>
+								<img src="./images/pr-create.png" width="200" alt="" />
+							</figure>
+						</li>
+					</ol>
 				</section>
 
 				<section id="request-reviews">
 					<h4>Request reviews</h4>
 
-					<p>Pull requests should always be reviewed by at least one other editor before merging.</p>
+					<p>Pull requests should always be reviewed by at least one other editor before merging. If you do
+						not request a review, editors may not be aware you want their input.</p>
 
-					<p>It is best to pick editors also involved with the issue you are addressing, but if in doubt never
-						worry about asking for too many reviewers.</p>
+					<div class="note">
+						<p>It is best to pick editors also involved with the issue you are addressing, but if in doubt
+							never worry about asking for too many reviewers.</p>
+					</div>
 
-					<p>If you don't request a review, editor's may not be aware you want their input.</p>
+					<p>To request a review, follow these steps:</p>
 
-					<p>To request a review, go to the "Reviewers" section in the pull request and click on the
-						heading.</p>
+					<ol>
+						<li>
+							<p>Go to the "Reviewers" section in the pull request tab and click on the cog beside the
+								heading.</p>
+							<figure>
+								<figcaption>Pull request reviewers section</figcaption>
+								<img src="./images/pr-review.png" width="300" alt="" />
+								<details>
+									<summary>Description</summary>
+									<p>Beside the "Reviewers" heading is a grey cog icon. Clicking anywhere on the
+										heading or icon will activate the field.</p>
+								</details>
+							</figure>
+						</li>
 
-					<p>Enter the GitHub usernames of the people you want to review and select their accounts.</p>
+						<li>
+							<p>Enter the GitHub usernames of the people you want to review. As each user account
+								appears, click on the name to add the person as a reviewer.</p>
+							<figure>
+								<figcaption>Selecting reviewers</figcaption>
+								<img src="./images/pr-review-select.png" width="300" alt="" />
+								<details>
+									<summary>Description</summary>
+									<p>A text input field contains the name "Matt". Below the field, GitHub shows the
+										suggested reviewer "MattGarrish".</p>
+								</details>
+							</figure>
+							<p>When you select a user, a checkbox appears beside their account name.</p>
+							<figure>
+								<figcaption>Selected reviewer with checkmark</figcaption>
+								<img src="./images/pr-review-select-check.png" width="300" alt="" />
+							</figure>
+						</li>
 
-					<p>If you are an editor, you can merge your pull request after receiving approvals.</p>
-
-					<p>If you are not an editor, let the editors decide when to merge.</p>
+						<li>
+							<p>After adding all reviewers, exit the field to update the list.</p>
+						</li>
+					</ol>
 				</section>
 
 				<section id="review-pr">
 					<h4>Reviewing pull requests</h4>
 
-					<p>Open the pull request to review.</p>
+					<p>If someone requests you review their pull request, follow these steps to add your review:</p>
 
-					<p>Click on the "Add your review" button or select the "Files changed" tab.</p>
+					<ol>
+						<li>
+							<p>Open the pull request to review.</p>
+						</li>
 
-					<p>Click on "Review changes" and select approve if everything is okay.</p>
+						<li>
+							<p>Click on the "Add your review" button if GitHub prompts you or select the "Files changed"
+								tab.</p>
+							<figure>
+								<figcaption>Review prompt</figcaption>
+								<img src="./images/pr-review-prompt.png" width="700" alt="" />
+								<details>
+									<summary>Description</summary>
+									<p>A GitHub alert box indicates who has requested the review and provides a button
+										to add your review (opens the Files changed tab). A manual link to the files
+										changed tab is also in the row of buttons below the alert.</p>
+								</details>
+							</figure>
+						</li>
 
-					<p>Otherwise, add comments to the changes by clicking on the + button (labelled "Add line
-						comment").</p>
+						<li>
+							<p>Review the GitHub diffs of the files. You can also go to the first comment in the pull
+								request to find links to an alternative preview and diff of the changes, but any
+								comments need to be made against the GitHub diffs.</p>
+						</li>
 
-					<p>Select the closest line for comments to avoid confusion.</p>
+						<li>
+							<p>To comment on a changed line, click the plus (+) button at the start of it (labelled "Add
+								line comment").</p>
+							<figure>
+								<figcaption>Reviewing edits</figcaption>
+								<img src="./images/pr-review-suggest.png" width="700" alt="" />
+								<details>
+									<summary>Description</summary>
+									<p>The image shows that the plus button for a line has been clicked and a new dialog
+										box is open where you can comment on the change. After entering a comment, the
+										"Add single comment" and "Start review" buttons beneath the input field become
+										active.</p>
+								</details>
+							</figure>
+							<p>The first time you add a comment you will be asked whether you want to start a review or
+								leave a single comment. Chose "Start a review" if you expect to add more than one
+								comment, otherwise click "Add single comment".</p>
+						</li>
 
-					<p>Click "Start a review" if you expect to add more than one comment, otherwise click "Add single
-						comment".</p>
+						<li>
+							<p>When you have reviewed all the changes, click the "Finish your review" button to post
+								your comments.</p>
+							<figure>
+								<figcaption>Finishing a review</figcaption>
+								<img src="./images/pr-review-finish.png" width="500" alt="" />
+								<details>
+									<summary>Description</summary>
+									<p>The image shows the "Finish your review" button has been clicked and a new dialog
+										is open beneath it. It has a text input field for additional comments and
+										options to indicate you are approving, commenting, or requesting changes. The
+										"Submit review" button is last in the dialog.</p>
+								</details>
+							</figure>
+							<p>If you did not add any comments, select "Approve" and then click the "Submit review"
+								button.</p>
+							<p>If you added comments, select "Comment" if they are only suggestions or "Request changes"
+								if they are problems that must be fixed.</p>
+						</li>
+					</ol>
 
-					<p>Click the "Finish your review" button to post your comments.</p>
-
-					<p>Select either "Comment" if they are suggestions or "Request changes" if fixes are needed.</p>
-
-					<p>To make general comments not specific to the changed source, use the text box at the bottom of
-						the Conversation tab.</p>
+					<div class="note">
+						<p>To make general comments not specific to the changed source, use the text box at the bottom
+							of the Conversation tab.</p>
+					</div>
 				</section>
 
 				<section id="edit-pr">
 					<h4>Editing a pull request</h4>
 
-					<p>Sometimes you might want to make a change to another person's pull request – to fix a typo, or
-						modify the text after a discussion.</p>
+					<p>Sometimes you might want to make a change to another person's pull request – for example, to fix
+						a typo, or modify the text after a discussion.</p>
 
-					<p>Follow these steps:</p>
+					<p>Editing pull requests is no different from editing your own branches &#8212; you are just working
+						in someone else's branch.</p>
+
+					<p>To edit a pull request, follow these steps:</p>
 
 					<ol>
-						<li>Pull the latest data</li>
-						<li>Checkout the branch used to create the pull request</li>
-						<li>Modify the files</li>
-						<li>Commit and push the changes</li>
+						<li><a href="#pull-updates">Pull</a> the latest data.</li>
+						<li><a href="#branch-switch">Check out</a> the branch used to create the pull request (you can
+							get this information from the pull request).</li>
+						<li>Modify the files.</li>
+						<li><a href="#commits">Commit</a> and <a href="#push-changes">push</a> the changes.</li>
 					</ol>
 
-					<p>The pull request is automatically updated with the commit.</p>
+					<p>The pull request is automatically updated with each commit; you do not have to reopen or update
+						it.</p>
 
-					<p>Users will be notified of changes to an open pull request.</p>
+					<p>When editing someone else's pull request, make sure your commit messages thoroughly describe what
+						you are doing. You should also add detailed comments to the pull request.</p>
 				</section>
 
+				<!--
 				<section id="pr-on-pr">
 					<h4>Pull requests on pull requests</h4>
 
@@ -575,16 +798,37 @@
 					<p>Follow these steps:</p>
 
 					<ol>
-						<li>Pull the latest data</li>
-						<li>Checkout the branch used to create the pull request</li>
-						<li>Create a new branch</li>
-						<li>Checkout the new branch</li>
-						<li>Modify the files</li>
-						<li>Commit the changes</li>
-						<li>Open a new pull request</li>
+						<li>Pull the latest data.</li>
+						<li>Checkout the branch used to create the pull request.</li>
+						<li>Create a new branch.</li>
+						<li>Checkout the new branch.</li>
+						<li>Modify the files.</li>
+						<li>Commit the changes.</li>
+						<li>Open a new pull request.</li>
 					</ol>
 
 					<p>When opening the new pull request, make sure the base branch is not "main".</p>
+				</section>
+				-->
+
+				<section id="merge-pr">
+					<h4>Merging pull requests</h4>
+
+					<p>If you are an editor, you can merge your pull request after receiving at least one approval.</p>
+
+					<p>If you are not an editor, let the editors decide when to merge.</p>
+
+					<p>To merge a pull request, go to the pull request tab, open the pull request, and click on the
+						"Merge pull request" button.</p>
+
+					<div class="note">
+						<p>When a pull request is merged, it may affect the ability to merge other open pull requests.
+							If GitHub is unsure how to merge the open changes with the ones that have been integrated,
+							it will flag you that there is a merge conflict.</p>
+
+						<p>GitHub allows you to edit merge conflicts from the web site, but if you are unsure about this
+							process, please contact DAISY staff to help.</p>
+					</div>
 				</section>
 			</section>
 		</section>
